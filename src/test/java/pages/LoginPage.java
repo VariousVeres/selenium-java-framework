@@ -2,26 +2,24 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LoginPage {
+public class LoginPage extends MainPage{
     private WebDriver driver = null;
     public LoginPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 
-    By registerButton = By.xpath("//div[@id='content']//a[@href='/join' and (contains(@class,'site-auth'))]");
-    By loginButton = By.xpath("//a[@class='site-auth-control']");
-    By emailInput = By.xpath("//input[@name='username_or_email']");
-    By passwordInput = By.xpath("//input[@type='password']");
-    By submitLoginDataButton = By.xpath("//div[@id='mantle_skin']//button[@type='submit']");
-
-
+    By userNameInput = By.name("username");
+    By passwordInput = By.name("password");
+    By submitLoginDataButton = By.xpath("//button[@type='submit']");
 
     public void logIn() {
-        driver.findElement(loginButton).click();
-        driver.findElement(emailInput).sendKeys("Whereisveres@gmail.com");
-        driver.findElement(passwordInput).sendKeys("Speci@lone1488");
+        driver.findElement(userNameInput).sendKeys("Whereisveres@gmail.com");
+        driver.findElement(passwordInput).sendKeys("Speci@lone86");
         driver.findElement(submitLoginDataButton).click();
+        explicitWait().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//button[@type='submit']")));
     }
 
 }

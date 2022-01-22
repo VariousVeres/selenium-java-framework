@@ -1,7 +1,7 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage {
     private WebDriver driver = null;
@@ -9,10 +9,7 @@ public class MainPage {
         this.driver = driver;
     }
 
-    By profileLogo = By.xpath("//nav[@class='masthead']//a[contains(@href,'/user') and (contains(@class,'auth-link'))]");
-
-
-    public void  clickOnProfileLogo() {
-        driver.findElement(profileLogo).click();
+    public WebDriverWait explicitWait() {
+        return new WebDriverWait(driver, 10);
     }
 }
