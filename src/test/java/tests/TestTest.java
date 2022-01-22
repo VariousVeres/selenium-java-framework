@@ -9,6 +9,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
+import static utils.TestLogger.LOGGER;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +18,7 @@ public class TestTest {
     private WebDriver driver = null;
     private ExtentHtmlReporter htmlReporter = null;
     private ExtentReports extent = null;
+    LoginPage loginPage = null;
 
     @Before
     public void beforeTest() {
@@ -33,8 +35,9 @@ public class TestTest {
 
     @Test
     public void login() {
-        LoginPage loginPage = new LoginPage(driver);
+        loginPage = new LoginPage(driver);
         loginPage.logIn();
+        LOGGER.info("Login was done successfully");
     }
 
     @After
