@@ -2,7 +2,6 @@ package pages.pages_object_models_pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pages.BasePage;
 
 public class PageObjectLoginPage extends PageObjectBasePage {
     private WebDriver driver = null;

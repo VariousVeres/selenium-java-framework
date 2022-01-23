@@ -11,10 +11,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.RegistrationPage;
-import pages.pages_object_models_pages.PageObjectLoginPage;
-import pages.pages_object_models_pages.PageObjectMainPage;
-import pages.pages_object_models_pages.PageObjectRegistrationPage;
 import utils.StringHelper;
+
+import static utils.Logging.LOGGER;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -40,6 +39,7 @@ public class RegistrationTest {
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
         driver.get("http://localhost:3000");
+        LOGGER.info("Opening main page");
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
         registrationPage = new RegistrationPage(driver);
@@ -49,12 +49,16 @@ public class RegistrationTest {
     public void proceedToLoginPage() {
         mainPage.dismissWelcomeBanner();
         mainPage.acceptCookies();
+        LOGGER.info("Proceeding to the login page");
         mainPage.proceedToLoginPage();
         assertEquals("Wrong Login page url", driver.getCurrentUrl(), "http://localhost:3000/#/login");
         loginPage.clickRegisterButton();
+        LOGGER.info("Choose new registration");
         assertEquals("Wrong Registration page url", driver.getCurrentUrl(), "http://localhost:3000/#/register");
-        registrationPage.register(StringHelper.getAlphanumericStringWithLength(7) + "@gmail.com",
-                "azAZ09@-", 1, "asd");
+        String email = StringHelper.getAlphanumericStringWithLength(7) + "@gmail.com";
+        String password = StringHelper.getAlphanumericStringWithLength(8);
+        registrationPage.register(email, password, 1, "asd");
+        LOGGER.info("New user with [{}] was registerd", email);
     }
 
     @After
