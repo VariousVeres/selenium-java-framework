@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.pages_object_models_pages.PageObjectMainPage;
 
-import static org.junit.Assert.assertEquals;
-
 public class LoginPage extends PageObjectMainPage {
     private WebDriver driver = null;
     public LoginPage(WebDriver driver) {
@@ -16,18 +14,10 @@ public class LoginPage extends PageObjectMainPage {
         this.driver = driver;
     }
 
-    @FindBy (name = "username")
-    WebElement userNameInput;
-    @FindBy (name = "password")
-    WebElement passwordInput;
-    @FindBy (xpath = "//button[@type='submit']")
-    WebElement submitLoginDataButton;
+    @FindBy (xpath = "//a[@href='#/register']")
+    WebElement registerButton;
 
-
-    public void logIn() {
-        userNameInput.sendKeys("Whereisveres@gmail.com");
-        passwordInput.sendKeys("Speci@lone86");
-        submitLoginDataButton.click();
-        assertEquals("Url is incorrect",driver.getCurrentUrl(),"https://qa.nwlegal.org/" );
+    public void clickRegisterButton() {
+        registerButton.click();
     }
 }

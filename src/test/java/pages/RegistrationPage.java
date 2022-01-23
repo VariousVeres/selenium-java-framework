@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,7 +27,7 @@ public class RegistrationPage extends BasePage{
     WebElement passwordRepeatInput;
     @FindBy (xpath="//div[@class='security-container']/mat-form-field[1]//div[contains(@class,'field-flex')]")
     WebElement secretQuestionBlock;
-    @FindBy (id="repeatPasswordControl")
+    @FindBy (xpath="//div[contains(@class,'cdk-overlay-container')]//div[@role='listbox']/mat-option")
     List<WebElement> secretQuestionAnswersList;
     @FindBy (id="securityAnswerControl")
     WebElement secretQuestionAnswerInput;
@@ -41,7 +42,7 @@ public class RegistrationPage extends BasePage{
         secretQuestionAnswersList.get(questionType - 1).click();
         secretQuestionAnswerInput.sendKeys(answer);
         submitRegistrationData.click();
-        myWait(3).until(ExpectedConditions.invisibilityOf(submitRegistrationData));
+        myWait(1).until(ExpectedConditions.invisibilityOfElementLocated(By.id("submitRegistrationData")));
         assertEquals("Wrong login page url", driver.getCurrentUrl(), "http://localhost:3000/#/login");
     }
 }
