@@ -2,7 +2,7 @@
 
 Framework for integration testing of Juice-Shop application
 
-Language: Java 8 /n
+Language: Java 8
 Running: TestNG
 Logging: Logback
 HTML reports: ReportNG
