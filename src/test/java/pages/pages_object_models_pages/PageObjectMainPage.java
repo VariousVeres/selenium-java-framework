@@ -14,7 +14,7 @@ public class PageObjectMainPage extends PageObjectBasePage {
     By dismissWelcomeBannerButton = By.xpath("//button[@aria-label='Close Welcome Banner']");
     By cookieAcceptButton = By.xpath("//a[@aria-label='dismiss cookie message']");
     By navigationAccountButton = By.cssSelector("button#navbarAccount");
-    By goToLoginPageButton = By.xpath("//button[@aria-label=Go to login page]");
+    By goToLoginPageButton = By.xpath("//button[@aria-label='Go to login page']");
 
     public WebDriverWait explicitWait() {
         return new WebDriverWait(driver, 10);
