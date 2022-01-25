@@ -13,12 +13,11 @@ import pages.MainPage;
 import pages.RegistrationPage;
 import utils.StringHelper;
 
-import static utils.Logging.LOGGER;
-
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static utils.Logging.*;
 
 public class RegistrationTest {
     private WebDriver driver = null;
@@ -58,7 +57,7 @@ public class RegistrationTest {
         String email = StringHelper.getAlphanumericStringWithLength(7) + "@gmail.com";
         String password = StringHelper.getAlphanumericStringWithLength(8);
         registrationPage.register(email, password, 1, "asd");
-        LOGGER.info("New user with [{}] was registerd", email);
+        LOGGER.info("New user with [{}] was registered", email);
     }
 
     @After
