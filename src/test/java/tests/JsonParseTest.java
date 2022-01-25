@@ -3,7 +3,7 @@ package tests;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonStreamParser;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 
 public class JsonParseTest {

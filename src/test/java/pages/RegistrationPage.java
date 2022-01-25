@@ -1,5 +1,7 @@
 package pages;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,8 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class RegistrationPage extends BasePage{
     WebDriver driver;
@@ -43,6 +43,6 @@ public class RegistrationPage extends BasePage{
         secretQuestionAnswerInput.sendKeys(answer);
         submitRegistrationData.click();
         myWait(1).until(ExpectedConditions.invisibilityOfElementLocated(By.id("submitRegistrationData")));
-        assertEquals("Wrong login page url", driver.getCurrentUrl(), "http://localhost:3000/#/login");
+        assertThat("Wrong login page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/login"));
     }
 }

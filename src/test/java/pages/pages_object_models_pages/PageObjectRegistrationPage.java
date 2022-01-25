@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static org.junit.Assert.assertEquals;
-
 public class PageObjectRegistrationPage extends PageObjectBasePage {
     WebDriver driver;
 
@@ -31,7 +29,7 @@ public class PageObjectRegistrationPage extends PageObjectBasePage {
         driver.findElement(secretQuestionAnswerInput).sendKeys(answer);
         driver.findElement(submitRegistrationData).click();
         myWait(3).until(ExpectedConditions.invisibilityOf(driver.findElement(submitRegistrationData)));
-        assertEquals("Wrong login page url", driver.getCurrentUrl(), "http://localhost:3000/#/login");
+//        assertEquals("Wrong login page url", driver.getCurrentUrl(), "http://localhost:3000/#/login");
     }
 
 }
