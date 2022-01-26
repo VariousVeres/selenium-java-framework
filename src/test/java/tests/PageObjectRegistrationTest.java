@@ -1,5 +1,6 @@
 package tests;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,8 +26,7 @@ public class PageObjectRegistrationTest {
 
     @BeforeSuite
     public void beforeTest() {
-        String userDir = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver", userDir + File.separator + "drivers/chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1920, 1650));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -50,8 +50,9 @@ public class PageObjectRegistrationTest {
 
     @AfterSuite
     public void afterTest() {
-
         driver.close();
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

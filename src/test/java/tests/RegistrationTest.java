@@ -12,8 +12,9 @@ import pages.LoginPage;
 import pages.MainPage;
 import pages.RegistrationPage;
 import utils.StringHelper;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
-import java.io.File;
+
 import java.util.concurrent.TimeUnit;
 
 import static utils.Logging.*;
@@ -26,8 +27,7 @@ public class RegistrationTest {
 
     @BeforeSuite
     public void beforeTest() {
-        String userDir = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver", userDir + File.separator + "drivers/chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1920, 1650));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -57,6 +57,8 @@ public class RegistrationTest {
     @AfterSuite
     public void afterTest() {
         driver.close();
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
