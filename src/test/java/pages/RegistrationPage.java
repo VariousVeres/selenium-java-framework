@@ -42,7 +42,7 @@ public class RegistrationPage extends BasePage{
         secretQuestionAnswersList.get(questionType - 1).click();
         secretQuestionAnswerInput.sendKeys(answer);
         submitRegistrationData.click();
-        myWait(1).until(ExpectedConditions.invisibilityOfElementLocated(By.id("submitRegistrationData")));
+        myWait(3).until(ExpectedConditions.invisibilityOfElementLocated(By.id("submitRegistrationData")));
         assertThat("Wrong login page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/login"));
     }
 }
