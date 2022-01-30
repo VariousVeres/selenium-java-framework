@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestAll">
+    <test name="Registration test">
+        <classes>
+            <class name="tests.RegistrationTest" />
+        </classes>
+    </test>
+    <test name="Page Object Registration Test">
+        <classes>
+            <class name="tests.PageObjectRegistrationTest" />
+        </classes>
+    </test>
+    <test name="JSON parsing test">
+        <classes>
+            <class name="tests.JsonParseTest" />
+        </classes>
+    </test>
+</suite>

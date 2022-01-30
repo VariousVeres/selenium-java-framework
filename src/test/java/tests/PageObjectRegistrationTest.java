@@ -4,9 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.pages_object_models_pages.PageObjectLoginPage;
 import pages.pages_object_models_pages.PageObjectMainPage;
 import pages.pages_object_models_pages.PageObjectRegistrationPage;
@@ -24,7 +22,7 @@ public class PageObjectRegistrationTest {
     PageObjectLoginPage pageObjectLoginPage = null;
     PageObjectRegistrationPage pageObjectRegistrationPage = null;
 
-    @BeforeSuite
+    @BeforeTest
     public void beforeTest() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -48,7 +46,7 @@ public class PageObjectRegistrationTest {
                 "azAZ09@-", 1, "asd");
     }
 
-    @AfterSuite
+    @AfterTest
     public void afterTest() {
         driver.close();
         if (driver != null) {

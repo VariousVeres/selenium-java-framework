@@ -6,9 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MainPage{
-    private WebDriver driver = null;
     public MainPage(WebDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -20,7 +18,6 @@ public class MainPage{
     WebElement navigationAccountButton;
     @FindBy(xpath="//button[@aria-label='Go to login page']")
     WebElement goToLoginPageButton;
-
 
 
     public void dismissWelcomeBanner()  {

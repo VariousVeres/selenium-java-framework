@@ -12,13 +12,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 public class RegistrationPage extends BasePage{
-    WebDriver driver;
-
     public RegistrationPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
     @FindBy (id="emailControl")
     WebElement emailInput;
     @FindBy (id="passwordControl")

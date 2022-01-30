@@ -8,8 +8,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PageObjectRegistrationPage extends PageObjectBasePage {
-    WebDriver driver;
-
     public PageObjectRegistrationPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
