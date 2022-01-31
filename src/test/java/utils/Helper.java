@@ -1,8 +1,11 @@
 package utils;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+
 import java.security.SecureRandom;
 
 
-public class StringHelper {
+public class Helper {
     static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom rnd = new SecureRandom();
 
@@ -12,4 +15,10 @@ public class StringHelper {
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
     }
+
+    public static String getTokenFromLocalStorage(WebDriver driver)  {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return (String) js.executeScript("return window.localStorage.getItem('token');");
+    }
+
 }

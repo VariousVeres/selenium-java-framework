@@ -8,9 +8,8 @@ import org.testng.annotations.*;
 import pages.pages_object_models_pages.PageObjectLoginPage;
 import pages.pages_object_models_pages.PageObjectMainPage;
 import pages.pages_object_models_pages.PageObjectRegistrationPage;
-import utils.StringHelper;
+import utils.Helper;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -42,7 +41,7 @@ public class PageObjectRegistrationTest {
         assertThat("Wrong Login page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/login"));
         pageObjectLoginPage.clickRegisterButton();
         assertThat("Wrong Registration page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/register"));
-        pageObjectRegistrationPage.register(StringHelper.getAlphanumericStringWithLength(7) + "@gmail.com",
+        pageObjectRegistrationPage.register(Helper.getAlphanumericStringWithLength(7) + "@gmail.com",
                 "azAZ09@-", 1, "asd");
     }
 

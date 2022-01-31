@@ -10,7 +10,7 @@ import org.testng.annotations.*;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.RegistrationPage;
-import utils.StringHelper;
+import utils.Helper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
@@ -49,8 +49,8 @@ public class RegistrationTest {
         loginPage.clickRegisterButton();
         LOGGER.info("Choose new registration");
         assertThat("Wrong Registration page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/register"));
-        email = StringHelper.getAlphanumericStringWithLength(7) + "@gmail.com";
-        password = StringHelper.getAlphanumericStringWithLength(8);
+        email = Helper.getAlphanumericStringWithLength(7) + "@gmail.com";
+        password = Helper.getAlphanumericStringWithLength(8);
         registrationPage.register(email, password, 1, "asd");
         LOGGER.info("New user with [{}] was registered", email);
     }
