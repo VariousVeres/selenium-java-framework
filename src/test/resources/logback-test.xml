@@ -7,8 +7,8 @@
         </encoder>
     </appender>
     <!--File appender-->
-    <timestamp key="bySecond" datePattern="yyyy-MM-dd"/>
-    <property name="LOG_FILE" value="${bySecond}-log.txt"/>
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+    <property name="LOG_FILE" value="${byDay}-log.txt"/>
     <property name="LOG_DIR" value="target/"/>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
