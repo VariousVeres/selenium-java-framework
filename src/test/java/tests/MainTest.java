@@ -1,8 +1,9 @@
 package tests;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import pages.MainPage;
+import utils.Dictionary;
 import utils.Helper;
 
 import java.util.regex.Pattern;
@@ -13,13 +14,13 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MainTest extends RegistrationTest {
-    LoginPage loginPage = null;
+    MainPage mainPage;
 
-    @Test
+    @Test(priority = 1)
     void login() {
-        loginPage = new LoginPage(driver);
-        loginPage.logIn(email, password);
-        LOGGER.info("User with [{}] was logged in the system", email);
+        LoginPage loginPage = new LoginPage(driver);
+        mainPage = loginPage.logIn(Dictionary.EMAIL, Dictionary.PASSWORD);
+        LOGGER.info("User with [{}] was logged in the system", Dictionary.EMAIL);
         assertThat("Wrong search page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/search"));
     }
 
@@ -28,6 +29,12 @@ public class MainTest extends RegistrationTest {
         String token = Helper.getTokenFromLocalStorage(driver);
         boolean matches = Pattern.matches("^\\w{36}.\\w{555}.+", token);
         assertThat("Wrong token in local storage", matches, equalTo(true));
+    }
+
+    @Test(priority = 2)
+    public void jext() {
+        mainPage.clickOnNthProduct(2);
+
     }
 
 }

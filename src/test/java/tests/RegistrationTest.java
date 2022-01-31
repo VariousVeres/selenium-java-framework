@@ -10,6 +10,7 @@ import org.testng.annotations.*;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.RegistrationPage;
+import utils.Dictionary;
 import utils.Helper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -20,11 +21,6 @@ import static utils.Logging.LOGGER;
 
 public class RegistrationTest {
     public WebDriver driver = null;
-    MainPage mainPage = null;
-    LoginPage loginPage = null;
-    RegistrationPage registrationPage = null;
-    String email = "";
-    String password = "";
 
     @BeforeSuite
     public void driverInitialization() {
@@ -38,19 +34,19 @@ public class RegistrationTest {
     public void registration() {
         driver.get("http://localhost:3000");
         LOGGER.info("Opening main page");
-        mainPage = new MainPage(driver);
-        loginPage = new LoginPage(driver);
-        registrationPage = new RegistrationPage(driver);
+        MainPage mainPage = new MainPage(driver);
         mainPage.dismissWelcomeBanner();
         mainPage.acceptCookies();
+        LoginPage loginPage = mainPage.proceedToLoginPage();
         LOGGER.info("Proceeding to the login page");
-        mainPage.proceedToLoginPage();
         assertThat("Wrong Login page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/login"));
-        loginPage.clickRegisterButton();
+        RegistrationPage registrationPage = loginPage.clickRegisterButton();
         LOGGER.info("Choose new registration");
         assertThat("Wrong Registration page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/register"));
-        email = Helper.getAlphanumericStringWithLength(7) + "@gmail.com";
-        password = Helper.getAlphanumericStringWithLength(8);
+        String email = Helper.getAlphanumericStringWithLength(7) + "@gmail.com";
+        String password = Helper.getAlphanumericStringWithLength(8);
+        Dictionary.setEMAIL(email);
+        Dictionary.setPASSWORD(password);
         registrationPage.register(email, password, 1, "asd");
         LOGGER.info("New user with [{}] was registered", email);
     }

@@ -7,8 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
+    WebDriver driver;
+
     public LoginPage(WebDriver driver) {
         super(driver);
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -21,15 +24,17 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//a[@href='#/register']")
     WebElement registerButton;
 
-    public void clickRegisterButton() {
+    public RegistrationPage clickRegisterButton() {
         registerButton.click();
+        return new RegistrationPage(driver);
     }
 
-    public void logIn(String email, String password) {
+    public MainPage logIn(String email, String password) {
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         loginButton.click();
         myWait(5).until(ExpectedConditions.urlContains("search"));
+        return new MainPage(driver);
     }
 
 }
