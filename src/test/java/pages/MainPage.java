@@ -1,16 +1,20 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class MainPage {
+public class MainPage extends BasePage {
     WebDriver driver;
 
     public MainPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -25,6 +29,17 @@ public class MainPage {
     WebElement goToLoginPageButton;
     @FindBy(xpath = "//mat-grid-tile/div/mat-card")
     List<WebElement> productsList;
+    //Review dialog
+    @FindBy(xpath = "//mat-dialog-container/app-product-details/mat-dialog-content//textarea")
+    WebElement reviewTextArea;
+    @FindBy(xpath = "//mat-dialog-container/app-product-details/mat-dialog-content//button[@type='submit']")
+    WebElement reviewSubmitButton;
+    @FindBy(xpath = "//mat-dialog-container/app-product-details//mat-expansion-panel-header")
+    WebElement reviewsExpand;
+    @FindBy(xpath = "//mat-dialog-container//div[contains(@class,'comment')]//cite")
+    List<WebElement> reviewsAuthorsNamesList;
+    @FindBy(xpath = "//mat-dialog-container//div[contains(@class,'comment')]//p")
+    List<WebElement> reviewsTextsList;
 
 
     public void dismissWelcomeBanner() {
@@ -43,6 +58,21 @@ public class MainPage {
 
     public void clickOnNthProduct(int i) {
         productsList.get(i - 1).click();
+        myWait(1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//mat-dialog-container/app-product-details/mat-dialog-content")));
+    }
+
+    public void addProductReview(String review) {
+        reviewTextArea.sendKeys(review);
+        reviewSubmitButton.click();
+        reviewsExpand.click();
+    }
+
+    public List<String> getReviewsAuthorsNamesList()  {
+        return reviewsAuthorsNamesList.stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    public List<String> getReviewsTextsList()  {
+        return reviewsTextsList.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
 
