@@ -34,6 +34,8 @@ public class MainPage extends BasePage {
     WebElement reviewTextArea;
     @FindBy(xpath = "//mat-dialog-container/app-product-details/mat-dialog-content//button[@type='submit']")
     WebElement reviewSubmitButton;
+    @FindBy(xpath = "//mat-dialog-container/app-product-details//button[@aria-label='Close Dialog']")
+    WebElement reviewBlockCloseButton;
     @FindBy(xpath = "//mat-dialog-container/app-product-details//mat-expansion-panel-header")
     WebElement reviewsExpand;
     @FindBy(xpath = "//mat-dialog-container//div[contains(@class,'comment')]//cite")
@@ -64,14 +66,21 @@ public class MainPage extends BasePage {
     public void addProductReview(String review) {
         reviewTextArea.sendKeys(review);
         reviewSubmitButton.click();
+    }
+
+    public void expandReviews() {
         reviewsExpand.click();
     }
 
-    public List<String> getReviewsAuthorsNamesList()  {
+    public void closeReviewBlock() {
+        reviewBlockCloseButton.click();
+    }
+
+    public List<String> getReviewsAuthorsNamesList() {
         return reviewsAuthorsNamesList.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    public List<String> getReviewsTextsList()  {
+    public List<String> getReviewsTextsList() {
         return reviewsTextsList.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
