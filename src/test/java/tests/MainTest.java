@@ -1,5 +1,7 @@
 package tests;
 
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.MainPage;
@@ -8,6 +10,7 @@ import utils.Helper;
 
 import java.util.regex.Pattern;
 
+import static io.restassured.RestAssured.given;
 import static utils.Logging.LOGGER;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -38,5 +41,12 @@ public class MainTest extends RegistrationTest {
         assertThat("Authors name is not present", mainPage.getReviewsAuthorsNamesList().contains(Dictionary.EMAIL), equalTo(true));
         assertThat("Authors review is not present", mainPage.getReviewsTextsList().contains("The best product I've ever used"), equalTo(true));
     }
+
+    @Test(priority = 3)
+    public void getOnReview() {
+        Response res = given().when().get("http://localhost:3000/rest/products/1/reviews").then().statusCode(HttpStatus.SC_OK).extract().response();
+        LOGGER.info(res.asString());
+    }
+
 
 }
