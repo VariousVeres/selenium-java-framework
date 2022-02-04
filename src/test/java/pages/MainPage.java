@@ -27,8 +27,16 @@ public class MainPage extends BasePage {
     WebElement navigationAccountButton;
     @FindBy(xpath = "//button[@aria-label='Go to login page']")
     WebElement goToLoginPageButton;
+    @FindBy(xpath = "//mat-toolbar//button[@routerlink='/basket']")
+    WebElement basketButton;
+
+    //Navigation toolbar
+
+    //Products panel
     @FindBy(xpath = "//mat-grid-tile/div/mat-card")
-    List<WebElement> productsList;
+    List<WebElement> productsPanelsList;
+    @FindBy(xpath = "//mat-grid-tile/div/mat-card//button[@aria-label='Add to Basket']")
+    List<WebElement> productsAddToBasketButtonsList;
 
     //Review dialog
     @FindBy(xpath = "//mat-dialog-container/app-product-details/mat-dialog-content//textarea")
@@ -62,7 +70,7 @@ public class MainPage extends BasePage {
     }
 
     public void clickOnNthProduct(int i) {
-        productsList.get(i - 1).click();
+        productsPanelsList.get(i - 1).click();
         myWait(1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//mat-dialog-container/app-product-details/mat-dialog-content")));
     }
 
@@ -90,6 +98,15 @@ public class MainPage extends BasePage {
     public int getReviewsAmount() {
         String reviews = reviewsAmount.getText();
         return Integer.parseInt(reviews.substring(1, reviews.length() - 1));
+    }
+
+    public void clickAddNthProductToBasket(int i)  {
+        productsAddToBasketButtonsList.get(i-1).click();
+    }
+
+    public BasketPage openBasket()  {
+        basketButton.click();
+        return new BasketPage(driver);
     }
 
 }

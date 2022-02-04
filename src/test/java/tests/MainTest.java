@@ -1,14 +1,15 @@
 package tests;
 
-import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
+import pages.BasePage;
+import pages.BasketPage;
 import pages.LoginPage;
 import pages.MainPage;
+import pages.pages_object_models_pages.AddressPage;
 import utils.Dictionary;
 import utils.Helper;
 
-import java.util.Properties;
 import java.util.regex.Pattern;
 
 import static io.restassured.RestAssured.given;
@@ -55,6 +56,15 @@ public class MainTest extends RegistrationTest {
                 .then().statusCode(HttpStatus.SC_CREATED).extract().response();
         mainPage.clickOnNthProduct(2);
         assertThat("Review wasn't added by API request", mainPage.getReviewsAmount(), equalTo(reviewsAmount + 1));
+        mainPage.closeReviewBlock();
+    }
+
+    @Test(priority = 43)
+    public void orderWithNthProduct() {
+        mainPage.clickAddNthProductToBasket(5);
+        BasketPage basketPage = mainPage.openBasket();
+        AddressPage addressPage = basketPage.clickCheckout();
+        addressPage.clickAddNewAddressButton();
     }
 
 
