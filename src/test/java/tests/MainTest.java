@@ -20,6 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class MainTest extends RegistrationTest {
     MainPage mainPage;
     String token;
+    int reviewsAmount;
 
     @Test(priority = 1)
     void login() {
@@ -43,6 +44,7 @@ public class MainTest extends RegistrationTest {
         mainPage.expandReviews();
         assertThat("Authors name is not present", mainPage.getReviewsAuthorsNamesList().contains(Dictionary.EMAIL), equalTo(true));
         assertThat("Authors review is not present", mainPage.getReviewsTextsList().contains("The best product I've ever used"), equalTo(true));
+        reviewsAmount = mainPage.getReviewsAmount();
         mainPage.closeReviewBlock();
     }
 
@@ -52,8 +54,7 @@ public class MainTest extends RegistrationTest {
                 .put(Helper.getProperty("host.url") + "/rest/products/ 24 /reviews")
                 .then().statusCode(HttpStatus.SC_CREATED).extract().response();
         mainPage.clickOnNthProduct(2);
-        mainPage.expandReviews();
-        //Add assert for reviews count
+        assertThat("Review wasn't added by API request", mainPage.getReviewsAmount(), equalTo(reviewsAmount + 1));
     }
 
 

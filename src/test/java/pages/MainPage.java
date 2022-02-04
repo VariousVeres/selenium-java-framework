@@ -29,6 +29,7 @@ public class MainPage extends BasePage {
     WebElement goToLoginPageButton;
     @FindBy(xpath = "//mat-grid-tile/div/mat-card")
     List<WebElement> productsList;
+
     //Review dialog
     @FindBy(xpath = "//mat-dialog-container/app-product-details/mat-dialog-content//textarea")
     WebElement reviewTextArea;
@@ -38,6 +39,8 @@ public class MainPage extends BasePage {
     WebElement reviewBlockCloseButton;
     @FindBy(xpath = "//mat-dialog-container/app-product-details//mat-expansion-panel-header")
     WebElement reviewsExpand;
+    @FindBy(xpath = "//mat-dialog-container//mat-panel-title/span[2]")
+    WebElement reviewsAmount;
     @FindBy(xpath = "//mat-dialog-container//div[contains(@class,'comment')]//cite")
     List<WebElement> reviewsAuthorsNamesList;
     @FindBy(xpath = "//mat-dialog-container//div[contains(@class,'comment')]//p")
@@ -84,5 +87,9 @@ public class MainPage extends BasePage {
         return reviewsTextsList.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
+    public int getReviewsAmount() {
+        String reviews = reviewsAmount.getText();
+        return Integer.parseInt(reviews.substring(1, reviews.length() - 1));
+    }
 
 }
