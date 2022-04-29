@@ -1,9 +1,12 @@
 package pages.pages_object_models_pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddressPage {
     WebDriver driver;
@@ -34,9 +37,13 @@ public class AddressPage {
 
     public void clickAddNewAddressButton() {
         addNewAddressButton.click();
+        WebDriverWait wait= new WebDriverWait(driver,3);
+        wait.withMessage("Address page was not displayed").until(driver->driver.findElement(By.xpath("//app-address-create//input[contains(@data-placeholder,'country')]")));
     }
 
     public void fillAddressData()  {
-
+        WebDriverWait w = new WebDriverWait(driver, 12);
+        w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("asd")));
+        String s;
     }
 }

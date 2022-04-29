@@ -21,6 +21,7 @@ import static utils.Logging.LOGGER;
 
 public class RegistrationTest {
     public WebDriver driver = null;
+    MainPage mainPage;
 
     @BeforeSuite
     public void driverInitialization() {
@@ -31,17 +32,17 @@ public class RegistrationTest {
     }
 
     @BeforeSuite
-    public void registration() {
+    public void registrationAndLogIn() {
         driver.get("http://localhost:3000");
         LOGGER.info("Opening main page");
-        MainPage mainPage = new MainPage(driver);
+        mainPage = new MainPage(driver);
         mainPage.dismissWelcomeBanner();
         mainPage.acceptCookies();
         LoginPage loginPage = mainPage.proceedToLoginPage();
         LOGGER.info("Proceeding to the login page");
         assertThat("Wrong Login page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/login"));
         RegistrationPage registrationPage = loginPage.clickRegisterButton();
-        LOGGER.info("Choose new registration");
+        LOGGER.info("Choose new registrationAndLogIn");
         assertThat("Wrong Registration page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/register"));
         String email = Helper.getAlphanumericStringWithLength(7) + "@gmail.com";
         String password = Helper.getAlphanumericStringWithLength(8);
@@ -49,6 +50,14 @@ public class RegistrationTest {
         Dictionary.setPASSWORD(password);
         registrationPage.register(email, password, 1, "asd");
         LOGGER.info("New user with [{}] was registered", email);
+        mainPage = loginPage.logIn(Dictionary.EMAIL, Dictionary.PASSWORD);
+        LOGGER.info("User with [{}] was logged in the system", Dictionary.EMAIL);
+        assertThat("Wrong search page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/search"));
+    }
+
+    @BeforeSuite
+    void login() {
+
     }
 
     @AfterSuite

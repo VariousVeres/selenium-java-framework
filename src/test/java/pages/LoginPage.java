@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
-    WebDriver driver;
 
     public LoginPage(WebDriver driver) {
         super(driver);

@@ -27,6 +27,4 @@ public class Contact {
         String state;
     }
 
-    buildContact
-
 }

@@ -106,6 +106,7 @@ public class MainPage extends BasePage {
 
     public BasketPage openBasket()  {
         basketButton.click();
+        myWait(3).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button#checkoutButton")));
         return new BasketPage(driver);
     }
 
