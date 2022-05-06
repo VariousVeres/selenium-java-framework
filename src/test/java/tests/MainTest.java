@@ -1,10 +1,11 @@
 package tests;
 
+import models.Contact;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 import pages.BasketPage;
 import pages.MainPage;
-import pages.pages_object_models_pages.AddressPage;
+import pages.AddressPage;
 import utils.Dictionary;
 import utils.Helper;
 
@@ -52,11 +53,14 @@ public class MainTest extends RegistrationTest {
 
     @Test(priority = 4)
     public void orderWithNthProduct() {
+        mainPage = new MainPage(driver);
         mainPage.clickAddNthProductToBasket(5);
         BasketPage basketPage = mainPage.openBasket();
         AddressPage addressPage = basketPage.clickCheckout();
         addressPage.clickAddNewAddressButton();
-        addressPage.fillAddressData();
+        Contact.ContactBuilder cb = new Contact.ContactBuilder();
+        Contact c = cb.buildContact();
+        addressPage.fillAddressData(c);
     }
 
 

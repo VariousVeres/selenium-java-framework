@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.pages_object_models_pages.AddressPage;
 
 public class BasketPage extends BasePage{
     WebDriver driver;
@@ -22,8 +21,8 @@ public class BasketPage extends BasePage{
 
 
     public AddressPage clickCheckout() {
+        myWait(3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='checkoutButton' and not(@disabled)]")));
         checkoutButton.click();
-        myWait(3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@aria-label='Add a new address']")));
         return new AddressPage(driver);
     }
 

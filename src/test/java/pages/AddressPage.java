@@ -1,5 +1,6 @@
-package pages.pages_object_models_pages;
+package pages;
 
+import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,10 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AddressPage {
+public class AddressPage extends BasePage {
     WebDriver driver;
 
     public AddressPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -25,6 +27,8 @@ public class AddressPage {
     WebElement nameInput;
     @FindBy(xpath = "//app-address-create//input[contains(@data-placeholder,'mobile')]")
     WebElement mobileNumberInput;
+    @FindBy(xpath = "//app-address-create//input[contains(@data-placeholder,'code')]")
+    WebElement zipCodeInput;
     @FindBy(xpath = "//app-address-create//textarea[contains(@data-placeholder,'address')]")
     WebElement addressTextarea;
     @FindBy(xpath = "//app-address-create//input[contains(@data-placeholder,'city')]")
@@ -37,13 +41,19 @@ public class AddressPage {
 
     public void clickAddNewAddressButton() {
         addNewAddressButton.click();
-        WebDriverWait wait= new WebDriverWait(driver,3);
-        wait.withMessage("Address page was not displayed").until(driver->driver.findElement(By.xpath("//app-address-create//input[contains(@data-placeholder,'country')]")));
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.withMessage("Address page was not displayed").until(driver -> driver.findElement(By.xpath("//app-address-create//input[contains(@data-placeholder,'country')]")));
     }
 
-    public void fillAddressData()  {
-        WebDriverWait w = new WebDriverWait(driver, 12);
-        w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("asd")));
-        String s;
+    public void fillAddressData(Contact contact) {
+        countryInput.sendKeys(contact.getCountry());
+        nameInput.sendKeys(contact.getName());
+        mobileNumberInput.sendKeys(String.valueOf(contact.getMobileNumber()));
+        zipCodeInput.sendKeys(String.valueOf(contact.getZipCode()));
+        addressTextarea.sendKeys(contact.getAddress());
+        cityInput.sendKeys(contact.getCity());
+        stateInput.sendKeys(contact.getState());
+        submitAddressData.click();
+        myWait(15).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("234")));
     }
 }
