@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class MainPage extends BasePage {
     WebDriver driver;
@@ -35,6 +36,8 @@ public class MainPage extends BasePage {
     //Products panel
     @FindBy(xpath = "//mat-grid-tile/div/mat-card")
     List<WebElement> productsPanelsList;
+    @FindBy(xpath = "//div[@class='item-name']")
+    List<WebElement> productsItemsNameList;
     @FindBy(xpath = "//mat-grid-tile/div/mat-card//button[@aria-label='Add to Basket']")
     List<WebElement> productsAddToBasketButtonsList;
 
@@ -100,11 +103,14 @@ public class MainPage extends BasePage {
         return Integer.parseInt(reviews.substring(1, reviews.length() - 1));
     }
 
-    public void clickAddNthProductToBasket(int i)  {
-        productsAddToBasketButtonsList.get(i-1).click();
+    public void addProductToBasket(String productName) {
+        int indexToSelect = IntStream.range(0, productsItemsNameList.size())
+                .filter(index -> productsItemsNameList.get(index).getText().contains(productName))
+                .findFirst().getAsInt();
+        productsAddToBasketButtonsList.get(indexToSelect).click();
     }
 
-    public BasketPage openBasket()  {
+    public BasketPage openBasket() {
         basketButton.click();
         myWait(3).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button#checkoutButton")));
         return new BasketPage(driver);

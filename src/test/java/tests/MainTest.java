@@ -3,9 +3,7 @@ package tests;
 import models.Contact;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
-import pages.BasketPage;
-import pages.MainPage;
-import pages.AddressPage;
+import pages.*;
 import utils.Dictionary;
 import utils.Helper;
 
@@ -13,6 +11,7 @@ import java.util.regex.Pattern;
 
 import static io.restassured.RestAssured.given;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -52,15 +51,23 @@ public class MainTest extends RegistrationTest {
     }
 
     @Test(priority = 4)
-    public void orderWithNthProduct() {
+    public void orderWithProduct() {
         mainPage = new MainPage(driver);
-        mainPage.clickAddNthProductToBasket(5);
+        mainPage.addProductToBasket("Carrot Juice");
         BasketPage basketPage = mainPage.openBasket();
         AddressPage addressPage = basketPage.clickCheckout();
         addressPage.clickAddNewAddressButton();
         Contact.ContactBuilder cb = new Contact.ContactBuilder();
         Contact c = cb.buildContact();
         addressPage.fillAddressData(c);
+        addressPage.chooseNthAddressFromSeection(1);
+        DeliveryPage deliveryPage = addressPage.continueWithSelectedAddress();
+        deliveryPage.selectDelivery(DeliveryPage.DeliveryMethod.STANDART);
+        PaymentPage paymentPage = deliveryPage.proceedWithSelectedDelivery();
+        paymentPage.addCreditCard(PaymentPage.PaymentMethod.CREDIT_CARD);
+        OrderSummaryPage summaryPage = paymentPage.submitNthCardAndContinue(1);
+        OrderCompletionPage completionPage = summaryPage.completePurchase();
+        assertThat("Wrong product name in order completion page", completionPage.getProductName(), containsString("Carrot Juice"));
     }
 
 

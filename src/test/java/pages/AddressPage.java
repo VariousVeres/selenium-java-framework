@@ -6,11 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.List;
 
 public class AddressPage extends BasePage {
-    WebDriver driver;
+WebDriver driver;
 
     public AddressPage(WebDriver driver) {
         super(driver);
@@ -38,11 +38,25 @@ public class AddressPage extends BasePage {
     @FindBy(xpath = "//app-address-create//button[@id='submitButton']")
     WebElement submitAddressData;
 
+    //New address panel
+    @FindBy(xpath = "//app-address//mat-table/mat-row")
+    List<WebElement> addressSelectionList;
+    @FindBy(xpath = "//app-address//button[contains(@aria-label,'Proceed')]")
+    WebElement continueWithSelectedAddressButton;
 
     public void clickAddNewAddressButton() {
         addNewAddressButton.click();
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.withMessage("Address page was not displayed").until(driver -> driver.findElement(By.xpath("//app-address-create//input[contains(@data-placeholder,'country')]")));
+    }
+
+    public void chooseNthAddressFromSeection(int i)  {
+        addressSelectionList.get(i-1).click();
+    }
+
+    public DeliveryPage continueWithSelectedAddress() {
+        continueWithSelectedAddressButton.click();
+        return new DeliveryPage(driver);
     }
 
     public void fillAddressData(Contact contact) {
@@ -54,6 +68,5 @@ public class AddressPage extends BasePage {
         cityInput.sendKeys(contact.getCity());
         stateInput.sendKeys(contact.getState());
         submitAddressData.click();
-        myWait(15).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("234")));
     }
 }
