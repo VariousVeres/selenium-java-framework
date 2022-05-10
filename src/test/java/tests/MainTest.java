@@ -18,10 +18,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class MainTest extends RegistrationTest {
     MainPage mainPage;
     String token;
-    int reviewsAmount;
 
-
-    @Test(priority = 1, alwaysRun = true)
+    @Test(priority = 1)
     public void checkTokenInLocalStorage() {
         token = Helper.getTokenFromLocalStorage(driver);
         boolean matches = Pattern.matches("^\\w{36}.\\w{555}.+", token);
@@ -36,15 +34,19 @@ public class MainTest extends RegistrationTest {
         mainPage.expandReviews();
         assertThat("Authors name is not present", mainPage.getReviewsAuthorsNamesList().contains(Dictionary.EMAIL), equalTo(true));
         assertThat("Authors review is not present", mainPage.getReviewsTextsList().contains("The best product I've ever used"), equalTo(true));
-        reviewsAmount = mainPage.getReviewsAmount();
         mainPage.closeReviewBlock();
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, dependsOnMethods = "checkTokenInLocalStorage")
     public void addReviewToSecondProductViaAPI() {
+        mainPage = new MainPage(driver);
+        mainPage.clickOnNthProduct(2);
+        mainPage.expandReviews();
+        int reviewsAmount = mainPage.getReviewsAmount();
+        mainPage.closeReviewBlock();
         given().when().header("Authorization", "Bearer " + token).body("{\"message\":\"My review text\",\"author\":\"test_mail@eleks.com\"}")
                 .put(Helper.getProperty("host.url") + "/rest/products/24/reviews")
-                .then().statusCode(HttpStatus.SC_CREATED).extract().response();
+                .then().statusCode(HttpStatus.SC_CREATED);
         mainPage.clickOnNthProduct(2);
         assertThat("Review wasn't added by API request", mainPage.getReviewsAmount(), equalTo(reviewsAmount + 1));
         mainPage.closeReviewBlock();

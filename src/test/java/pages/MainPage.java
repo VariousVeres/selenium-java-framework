@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -87,6 +88,9 @@ public class MainPage extends BasePage {
     }
 
     public void closeReviewBlock() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        //Scroll down till the bottom of the block
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
         reviewBlockCloseButton.click();
     }
 
