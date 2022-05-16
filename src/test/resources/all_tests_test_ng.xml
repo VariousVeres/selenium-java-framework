@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="TestAll">
-    <test name="Registration test">
+    <test name="Main test">
         <classes>
-            <class name="tests.RegistrationTest" />
+            <class name="tests.MainTest" />
         </classes>
     </test>
     <test name="Page Object Registration Test">
