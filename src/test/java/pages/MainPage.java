@@ -91,6 +91,7 @@ public class MainPage extends BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         //Scroll down till the bottom of the block
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+        myWait(3).until(ExpectedConditions.elementToBeClickable(By.xpath("//mat-dialog-container/app-product-details//button[@aria-label='Close Dialog']")));
         reviewBlockCloseButton.click();
     }
 
