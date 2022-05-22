@@ -26,7 +26,7 @@ public class Helper {
 
     public static String getProperty(String propName) {
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream("src/test/resources/config.properties")) {
+        try (InputStream input = new FileInputStream(System.getProperty("propertiesFile"))) {
             prop.load(input);
         } catch (IOException io) {
             io.printStackTrace();

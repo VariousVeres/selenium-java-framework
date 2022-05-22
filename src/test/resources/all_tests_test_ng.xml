@@ -11,9 +11,9 @@
             <class name="tests.PageObjectRegistrationTest" />
         </classes>
     </test>
-    <test name="JSON parsing test">
+    <test name="Other tests">
         <classes>
-            <class name="tests.JsonParseTest" />
+            <class name="tests.OtherTests" />
         </classes>
     </test>
 </suite>
