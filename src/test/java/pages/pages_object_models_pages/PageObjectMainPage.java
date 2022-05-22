@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageObjectMainPage extends PageObjectBasePage {
-    private WebDriver driver = null;
+    private WebDriver driver;
     public PageObjectMainPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
@@ -28,9 +28,10 @@ public class PageObjectMainPage extends PageObjectBasePage {
         driver.findElement(cookieAcceptButton).click();
     }
 
-    public void proceedToLoginPage()  {
+    public PageObjectLoginPage proceedToLoginPage()  {
         driver.findElement(navigationAccountButton).click();
         driver.findElement(goToLoginPageButton).click();
+        return new PageObjectLoginPage(driver);
     }
 
 }

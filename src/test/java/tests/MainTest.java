@@ -32,7 +32,7 @@ public class MainTest extends RegistrationTest {
         mainPage.clickOnNthProduct(2);
         mainPage.addProductReview("The best product I've ever used");
         mainPage.expandReviews();
-        assertThat("Authors name is not present", mainPage.getReviewsAuthorsNamesList().contains(Dictionary.EMAIL), equalTo(true));
+        assertThat("Authors email is not present", mainPage.getReviewsAuthorsNamesList().contains(Dictionary.EMAIL), equalTo(true));
         assertThat("Authors review is not present", mainPage.getReviewsTextsList().contains("The best product I've ever used"), equalTo(true));
         mainPage.closeReviewBlock();
     }

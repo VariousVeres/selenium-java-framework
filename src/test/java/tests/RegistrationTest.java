@@ -36,7 +36,7 @@ public class RegistrationTest {
 
     @BeforeSuite
     public void registrationAndLogIn() {
-        driver.get("http://localhost:3000");
+        driver.get(Helper.getProperty("host.url"));
         LOGGER.info("Opening main page");
         mainPage = new MainPage(driver);
         mainPage.dismissWelcomeBanner();

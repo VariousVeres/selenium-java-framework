@@ -27,19 +27,17 @@ public class PageObjectRegistrationTest {
         driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1920, 1650));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://localhost:3000");
-        pageObjectMainPage = new PageObjectMainPage(driver);
-        pageObjectLoginPage = new PageObjectLoginPage(driver);
-        pageObjectRegistrationPage = new PageObjectRegistrationPage(driver);
+        driver.get(Helper.getProperty("host.url"));
     }
 
     @Test
-    public void proceedToLoginPage() {
+    public void register() {
+        pageObjectMainPage = new PageObjectMainPage(driver);
         pageObjectMainPage.dismissWelcomeBanner();
         pageObjectMainPage.acceptCookies();
-        pageObjectMainPage.proceedToLoginPage();
+        pageObjectLoginPage = pageObjectMainPage.proceedToLoginPage();
         assertThat("Wrong Login page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/login"));
-        pageObjectLoginPage.clickRegisterButton();
+        pageObjectRegistrationPage = pageObjectLoginPage.clickRegisterButton();
         assertThat("Wrong Registration page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/register"));
         pageObjectRegistrationPage.register(Helper.getAlphanumericStringWithLength(7) + "@gmail.com",
                 "azAZ09@-", 1, "asd");

@@ -14,8 +14,9 @@ public class PageObjectLoginPage extends PageObjectBasePage {
     By registerButton = By.xpath("//a[@href='#/register']");
 
 
-    public void clickRegisterButton() {
+    public PageObjectRegistrationPage clickRegisterButton() {
         driver.findElement(registerButton).click();
+        return new PageObjectRegistrationPage(driver);
     }
 
 }
