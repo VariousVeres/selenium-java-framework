@@ -1,6 +1,6 @@
 # selenium-java-framework
 
-<h1>Framework for integration testing of Juice-Shop application</h1> <br/>
+<h3>Framework for integration testing of Juice-Shop application</h3> <br/>
 
 Language: Java 8  <br/>
 Running: TestNG  <br/>
