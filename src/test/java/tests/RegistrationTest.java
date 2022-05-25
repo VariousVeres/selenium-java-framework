@@ -9,6 +9,8 @@ import org.apache.http.HttpStatus;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
 import pages.LoginPage;
 import pages.MainPage;
@@ -18,6 +20,7 @@ import utils.Helper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import static utils.Logging.LOGGER;
@@ -29,7 +32,14 @@ public class RegistrationTest {
     @BeforeSuite
     public void driverInitialization() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        //Uncomment for headless or incognito browser
+//        options.addArguments("headless");
+        options.addArguments("incognito");
+        options.addExtensions(new File(System.getProperty("dataFolder") + File.separator + Helper.getProperty("fake_filler_file_name")));
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        driver = new ChromeDriver(capabilities);
         driver.manage().window().setSize(new Dimension(1920, 1650));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
@@ -68,7 +78,7 @@ public class RegistrationTest {
         LOGGER.info("Registration response: \n " + regResponse.asString());
 
         int userId = regResponse.path("data.id");
-        Response secQuestionResponse =given().when().body("{\"UserId\":" + userId + ",\"answer\":\"asd\",\"SecurityQuestionId\":1}")
+        Response secQuestionResponse = given().when().body("{\"UserId\":" + userId + ",\"answer\":\"asd\",\"SecurityQuestionId\":1}")
                 .post(Helper.getProperty("host.url") + "/api/SecurityAnswers/")
                 .then().statusCode(HttpStatus.SC_CREATED).extract().response();
         LOGGER.info("SecurityAnswers \n: " + secQuestionResponse.asString());
