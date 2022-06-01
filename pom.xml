@@ -10,8 +10,7 @@
 
     <properties>
         <url>http://localhost:3000</url>
-        <propertiesFolder>src/test/resources/properties</propertiesFolder>
-        <dataFolder>src/test/resources/data</dataFolder>
+        <resourcesFolder>src/test/resources</resourcesFolder>
     </properties>
 
     <dependencies>
@@ -106,13 +105,15 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${resourcesFolder}/main_tests_test_ng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <propertiesFile>${propertiesFolder}/config.properties</propertiesFile>
-                        <dataFolder>${dataFolder}</dataFolder>
+                        <propertiesFile>${resourcesFolder}/properties/config.properties</propertiesFile>
+                        <dataFolder>${resourcesFolder}/data</dataFolder>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

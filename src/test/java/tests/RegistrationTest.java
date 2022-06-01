@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.openqa.selenium.Dimension;
@@ -17,8 +18,6 @@ import pages.MainPage;
 import pages.RegistrationPage;
 import utils.Dictionary;
 import utils.Helper;
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -34,12 +33,14 @@ public class RegistrationTest {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         //Uncomment for headless or incognito browser
-//        options.addArguments("headless");
-        options.addArguments("incognito");
+//        options.addArguments("--headless", "--window-size=1920,1650");
+//        options.addArguments("--incognito");
         options.addExtensions(new File(System.getProperty("dataFolder") + File.separator + Helper.getProperty("fake_filler_file_name")));
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         driver = new ChromeDriver(capabilities);
+        //Uncomment for more complicated driver with options
+//        driver = Helper.createDriverWithOptions();
         driver.manage().window().setSize(new Dimension(1920, 1650));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
