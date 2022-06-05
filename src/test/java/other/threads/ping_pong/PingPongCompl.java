@@ -1,6 +1,7 @@
-package threads.ping_pong_threads;
+package other.threads.ping_pong;
 
-public class PingPong {
+/**Compicated realization with threads**/
+public class PingPongCompl {
     public static void main(String[] args) {
         Object LOCK_OBJECT = new Object();
         Thread ping = new Thread(new PingPongThread(LOCK_OBJECT, "Ping"));

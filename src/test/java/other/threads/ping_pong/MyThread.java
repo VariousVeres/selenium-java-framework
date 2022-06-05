@@ -1,11 +1,13 @@
-package threads;
+package other.threads.ping_pong;
 
-public class MyTgread extends Thread {
+
+/**Example of 2 parallel threads**/
+public class MyThread implements Runnable {
 
     public void run() {
         System.out.printf("%s thread started... \n", Thread.currentThread().getName());
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i <= 10; i++) {
             try {
                 Thread.sleep(500);
                 System.out.println(Thread.currentThread().getName()+ " is working:"+ i+" step");
@@ -21,10 +23,13 @@ public class MyTgread extends Thread {
 
 
 class Run {
-    public static void main(String[] args) {
-        MyTgread mgt1 = new MyTgread();
-        MyTgread mgt2 = new MyTgread();
-        mgt1.start();
-        mgt2.start();
+    public static void main(String[] args) throws InterruptedException {
+        MyThread mgt1 = new MyThread();
+        MyThread mgt2 = new MyThread();
+        Thread tr1 = new Thread(mgt1);
+        Thread tr2 = new Thread(mgt2);
+        tr1.start();
+        Thread.sleep(100);
+        tr2.start();
     }
 }

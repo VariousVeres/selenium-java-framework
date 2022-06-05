@@ -1,12 +1,11 @@
-package threads;
+package other.threads.ping_pong;
 
-class MyThread extends Thread {
+class MyThread1 extends Thread {
     String phrase;
     static int steps;
 
-    public MyThread(String str, int number)  {
+    public MyThread1(String str)  {
         phrase=str;
-        steps=number;
     }
     @Override
     public void run()  {
@@ -18,13 +17,14 @@ class MyThread extends Thread {
 }
 
 
-public class PingPong  {
+public class PingPong {
 
     public static void main(String[] args) throws InterruptedException {
-        MyThread tr1 = new MyThread("Ping \n", 10);
-        MyThread tr2 = new MyThread("Pong \n", 10);
+        MyThread1.steps=10;
+        MyThread1 tr1 = new MyThread1("Ping \n");
+        MyThread1 tr2 = new MyThread1("Pong \n");
         tr1.start();
-        Thread.sleep(10);
+        Thread.sleep(200);
         tr2.start();
     }
 
