@@ -54,6 +54,7 @@ public class AddressTest {
     public static void main(String[] args) {
         AddressTest test = new AddressTest();
         test.session= test.createHibernateSession();
+        test.session.beginTransaction();
         Address address = new Address();
         address.setHouseNumber(25);
         address.setStreet("Street");
