@@ -1,4 +1,4 @@
-package other.hibernate_try;
+package other.hibernate_try.first_example;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,15 +77,14 @@ public class PersonTest {
     public static void main(String[] args) {
         PersonTest p = new PersonTest();
         p.session= p.createHibernateSession();
-        p.createHibernateSession();
         List<Person> personList = new ArrayList<>();
-//        Person karen = new Person();
-//        karen.setId(3);
-//        karen.setName("Paria");
-//        personList.add(karen);
+        Person karen = new Person();
+        karen.setId(2);
+        karen.setName("Sveta");
+        personList.add(karen);
 //        p.recordsAdd(personList);
         List<Person> personsFromDBList= p.recordsRead();
-        p.recordFind(2);
+//        p.recordFind(2);
         p.session.close();
 
     }

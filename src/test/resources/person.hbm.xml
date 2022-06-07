@@ -3,10 +3,10 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="other.hibernate_try">
+<hibernate-mapping package="other.hibernate_try.first_example">
 
     <class name="Person" table="person">
-        <id name="id" type="int" column="id" >
+        <id name="id" type="int" column="id">
             <generator class="assigned" />
         </id>
 

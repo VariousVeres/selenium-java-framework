@@ -1,4 +1,4 @@
-package other.hibernate_try;
+package other.hibernate_try.first_example;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -6,10 +6,11 @@ import javax.persistence.Id;
 @Entity
 public class Person {
     @Id
-    int    id;
+    int id;
     String name;
 
-    public Person() {}
+    public Person() {
+    }
 
     public Person(int id, String name) {
         super();

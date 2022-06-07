@@ -9,9 +9,9 @@
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/hibernate_base</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">Veresunya1488</property>
+        <property name="hibernate.connection.password"></property>
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.connection.pool_size">2</property>
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <!-- SQL dialect -->
@@ -21,6 +21,7 @@
         <property name="hibernate.connection.characterEncoding">utf8</property>
         <property name="hibernate.connection.useUnicode">true</property>
 
-        <mapping class="other.hibernate_try.Person" />
+        <mapping class="other.hibernate_try.first_example.Person" />
+        <mapping class="other.hibernate_try.one_to_one.User" />
     </session-factory>
 </hibernate-configuration>
