@@ -2,6 +2,8 @@ package tests;
 
 import models.Contact;
 import org.apache.http.HttpStatus;
+import org.testng.ITestContext;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.*;
 import utils.Dictionary;
@@ -15,19 +17,21 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+
+@Listeners({AllureListener.class})
 public class MainTest extends RegistrationTest {
     MainPage mainPage;
     String token;
 
     @Test(priority = 1)
-    public void checkTokenInLocalStorage() {
+    public void checkTokenInLocalStorage(ITestContext iTestContext) {
         token = Helper.getTokenFromLocalStorage(driver);
         boolean matches = Pattern.matches("^\\w{36}.\\w{555}.+", token);
         assertThat("Wrong token in local storage", matches, equalTo(true));
     }
 
     @Test(priority = 2)
-    public void addReviewToSecondProduct() {
+    public void addReviewToSecondProduct(ITestContext iTestContext) {
         mainPage = new MainPage(driver);
         mainPage.clickOnNthProduct(2);
         mainPage.addProductReview("The best product I've ever used");
@@ -38,7 +42,7 @@ public class MainTest extends RegistrationTest {
     }
 
     @Test(priority = 3, dependsOnMethods = "checkTokenInLocalStorage")
-    public void addReviewToSecondProductViaAPI() {
+    public void addReviewToSecondProductViaAPI(ITestContext iTestContext) {
         mainPage = new MainPage(driver);
         mainPage.clickOnNthProduct(2);
         mainPage.expandReviews();
@@ -53,7 +57,7 @@ public class MainTest extends RegistrationTest {
     }
 
     @Test(priority = 4)
-    public void orderWithProduct() {
+    public void orderWithProduct(ITestContext iTestContext) {
         mainPage = new MainPage(driver);
         mainPage.addProductToBasket("Carrot Juice");
         BasketPage basketPage = mainPage.openBasket();
@@ -69,7 +73,7 @@ public class MainTest extends RegistrationTest {
         paymentPage.addCreditCard(PaymentPage.PaymentMethod.CREDIT_CARD);
         OrderSummaryPage summaryPage = paymentPage.submitNthCardAndContinue(1);
         OrderCompletionPage completionPage = summaryPage.completePurchase();
-        assertThat("Wrong product name in order completion page", completionPage.getProductName(), containsString("Carrot Juice"));
+        assertThat("Wrong product name in order completion page", completionPage.getProductName(), containsString("Cardrot Juice"));
     }
 
 

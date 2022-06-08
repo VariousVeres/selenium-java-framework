@@ -48,7 +48,7 @@ public class RegistrationTest {
     }
 
     @BeforeSuite
-    public void registrationAndLogIn() {
+    public void registrationAndLogIn(ITestContext iTestContext) {
         driver.get(Helper.getProperty("host.url"));
         LOGGER.info("Opening main page");
         mainPage = new MainPage(driver);
@@ -73,6 +73,10 @@ public class RegistrationTest {
 
     public static void setDriverIntoContext(ITestContext iTestContext, WebDriver driver)   {
         iTestContext.setAttribute("WebDriver", driver);
+    }
+
+    public static WebDriver getDriverFromContext(ITestContext iTestContext)  {
+        return (WebDriver) iTestContext.getAttribute("WebDriver");
     }
     public void registrationAndLogInAPI() {
         driver.get("http://localhost:3000");
