@@ -3,7 +3,7 @@
 <h3>Framework for integration testing of Juice-Shop application</h3> <br/>
 
 Run : mvn clean test <br/>
-Generate report: mvn allure:serve <br/>
+Generate report: mvn allure:serve or allure serve target/allure-results<br/>
 
 Language: Java 8  <br/>
 Running: TestNG  <br/>
