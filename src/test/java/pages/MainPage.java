@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -66,27 +67,28 @@ public class MainPage extends BasePage {
     public void acceptCookies() {
         cookieAcceptButton.click();
     }
-
+    @Step
     public LoginPage proceedToLoginPage() {
         navigationAccountButton.click();
         goToLoginPageButton.click();
         return new LoginPage(driver);
     }
 
+    @Step
     public void clickOnNthProduct(int i) {
         productsPanelsList.get(i - 1).click();
         myWait(1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//mat-dialog-container/app-product-details/mat-dialog-content")));
     }
-
+    @Step
     public void addProductReview(String review) {
         reviewTextArea.sendKeys(review);
         reviewSubmitButton.click();
     }
-
+    @Step
     public void expandReviews() {
         reviewsExpand.click();
     }
-
+    @Step
     public void closeReviewBlock() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         //Scroll down till the bottom of the block
@@ -94,27 +96,27 @@ public class MainPage extends BasePage {
         myWait(3).until(ExpectedConditions.elementToBeClickable(By.xpath("//mat-dialog-container/app-product-details//button[@aria-label='Close Dialog']")));
         reviewBlockCloseButton.click();
     }
-
+    @Step
     public List<String> getReviewsAuthorsNamesList() {
         return reviewsAuthorsNamesList.stream().map(WebElement::getText).collect(Collectors.toList());
     }
-
+    @Step
     public List<String> getReviewsTextsList() {
         return reviewsTextsList.stream().map(WebElement::getText).collect(Collectors.toList());
     }
-
+    @Step
     public int getReviewsAmount() {
         String reviews = reviewsAmount.getText();
         return Integer.parseInt(reviews.substring(1, reviews.length() - 1));
     }
-
+    @Step
     public void addProductToBasket(String productName) {
         int indexToSelect = IntStream.range(0, productsItemsNameList.size())
                 .filter(index -> productsItemsNameList.get(index).getText().contains(productName))
                 .findFirst().getAsInt();
         productsAddToBasketButtonsList.get(indexToSelect).click();
     }
-
+    @Step
     public BasketPage openBasket() {
         basketButton.click();
         myWait(3).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button#checkoutButton")));

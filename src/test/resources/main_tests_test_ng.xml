@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="My first suite">
-    <test name="Login and other basis tests">
+<suite name="Main automated suite" verbose="2">
+    <test name="Login and other basics tests">
         <classes>
             <class name="tests.MainTest"/>
         </classes>

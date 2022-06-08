@@ -11,6 +11,8 @@
     <properties>
         <url>http://localhost:3000</url>
         <resourcesFolder>src/test/resources</resourcesFolder>
+        <aspectj.version>1.9.6</aspectj.version>
+        <!--<allure-testng-version>2.13.9</allure-testng-version>-->
     </properties>
 
     <dependencies>
@@ -26,12 +28,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.14.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>reportng</artifactId>
-            <version>1.2.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -87,6 +83,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.13.9</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -102,9 +104,9 @@
 
     </dependencies>
 
-
     <build>
         <plugins>
+            <!-- Compiler plug-in -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -114,11 +116,16 @@
                 </configuration>
             </plugin>
 
+            <!-- Added Surefire Plugin configuration to execute tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>${resourcesFolder}/main_tests_test_ng.xml</suiteXmlFile>
                     </suiteXmlFiles>
@@ -127,6 +134,19 @@
                         <dataFolder>${resourcesFolder}/data</dataFolder>
                     </systemPropertyVariables>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <!--This plugin generates Allure report by existing XML files during Maven build process-->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
             </plugin>
         </plugins>
     </build>
