@@ -1,4 +1,4 @@
-package tests.design_patterns;
+package other.design_patterns;
 
 import org.testng.annotations.Test;
 

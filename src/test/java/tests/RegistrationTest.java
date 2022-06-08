@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.LoginPage;
 import pages.MainPage;
@@ -29,7 +30,7 @@ public class RegistrationTest {
     MainPage mainPage;
 
     @BeforeSuite
-    public void driverInitialization() {
+    public void driverInitialization(ITestContext iTestContext) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         //Uncomment for headless or incognito browser
@@ -39,6 +40,7 @@ public class RegistrationTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         driver = new ChromeDriver(capabilities);
+        setDriverIntoContext(iTestContext, driver);
         //Uncomment for more complicated driver with options
 //        driver = Helper.createDriverWithOptions();
         driver.manage().window().setSize(new Dimension(1920, 1650));
@@ -69,6 +71,9 @@ public class RegistrationTest {
         assertThat("Wrong search page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/search"));
     }
 
+    public static void setDriverIntoContext(ITestContext iTestContext, WebDriver driver)   {
+        iTestContext.setAttribute("WebDriver", driver);
+    }
     public void registrationAndLogInAPI() {
         driver.get("http://localhost:3000");
         String email = Helper.getAlphanumericStringWithLength(7) + "@gmail.com";
