@@ -2,9 +2,6 @@ package other.hibernate_try.one_to_many;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -34,5 +31,4 @@ public class EmployeeEntity implements Serializable {
     @JoinColumn(name="EMPLOYEE_ID")
     private Set<AccountEntity> accounts;
 
-    //Other fields, getters, setters are hidden for brevity
 }

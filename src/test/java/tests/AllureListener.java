@@ -17,5 +17,6 @@ public class AllureListener extends TestListenerAdapter {
         System.out.println("Executing listener on failure");
         WebDriver driver = RegistrationTest.getDriverFromContext(iTestResult.getTestContext());
         Allure.addAttachment(UUID.randomUUID().toString(), new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+        Allure.addAttachment(driver.getTitle()+" page structure:", driver.getPageSource());
  }
 }

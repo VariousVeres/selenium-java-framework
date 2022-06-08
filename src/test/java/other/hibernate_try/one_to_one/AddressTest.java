@@ -59,11 +59,9 @@ public class AddressTest {
         address.setHouseNumber(25);
         address.setStreet("Street");
         User user = new User();
-        user.setName("Sveta");//
+        user.setName("Sveta");
         user.setAddress(address);
-
-        test.session.save(address);
-        test.session.save(user);
+        test.session.persist(user);
         test.session.close();
 
     }
