@@ -1,7 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Main automated suite" verbose="2">
-    <test name="Login and other basics tests">
+    <parameter name="product1Value" value="Carrot Juice" />
+    <parameter name="product2Value" value="Carrot Juice" />
+    <test name="Login and other basics tests" parallel = "methods">
         <classes>
             <class name="tests.MainTest"/>
         </classes>

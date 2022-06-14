@@ -1,4 +1,4 @@
-package tests;
+package utils;
 
 import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
@@ -6,6 +6,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
+import tests.RegistrationTest;
 
 import java.io.ByteArrayInputStream;
 

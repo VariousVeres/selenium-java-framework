@@ -4,8 +4,11 @@ import models.Contact;
 import org.apache.http.HttpStatus;
 import org.testng.ITestContext;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.*;
+import utils.AllureListener;
+import utils.DataProviders;
 import utils.Dictionary;
 import utils.Helper;
 
@@ -24,14 +27,14 @@ public class MainTest extends RegistrationTest {
     String token;
 
     @Test(priority = 1)
-    public void checkTokenInLocalStorage(ITestContext iTestContext) {
+    public void checkTokenInLocalStorage() {
         token = Helper.getTokenFromLocalStorage(driver);
         boolean matches = Pattern.matches("^\\w{36}.\\w{555}.+", token);
         assertThat("Wrong token in local storage", matches, equalTo(true));
     }
 
     @Test(priority = 2)
-    public void addReviewToSecondProduct(ITestContext iTestContext) {
+    public void addReviewToSecondProduct() {
         mainPage = new MainPage(driver);
         mainPage.clickOnNthProduct(2);
         mainPage.addProductReview("The best product I've ever used");
@@ -57,7 +60,8 @@ public class MainTest extends RegistrationTest {
     }
 
     @Test(priority = 4)
-    public void orderWithProduct(ITestContext iTestContext) {
+    @Parameters({"product1Value"})
+    public void orderWithProduct() {
         mainPage = new MainPage(driver);
         mainPage.addProductToBasket("Carrot Juice");
         BasketPage basketPage = mainPage.openBasket();
@@ -73,7 +77,30 @@ public class MainTest extends RegistrationTest {
         paymentPage.addCreditCard(PaymentPage.PaymentMethod.CREDIT_CARD);
         OrderSummaryPage summaryPage = paymentPage.submitNthCardAndContinue(1);
         OrderCompletionPage completionPage = summaryPage.completePurchase();
-        assertThat("Wrong product name in order completion page", completionPage.getProductName(), containsString("Cardrot Juice"));
+        assertThat("Wrong product name in order completion page", completionPage.getProductName(), containsString("Carrot Juice"));
+        completionPage.returnToMainPage();
+
+    }
+
+    @Test(priority = 5, dataProvider = "product-names", dataProviderClass = DataProviders.class)
+    public void orderWithProductByName(String name) {
+        mainPage = new MainPage(driver);
+        mainPage.addProductToBasket(name);
+        BasketPage basketPage = mainPage.openBasket();
+        AddressPage addressPage = basketPage.clickCheckout();
+        addressPage.clickAddNewAddressButton();
+        Contact.ContactBuilder cb = new Contact.ContactBuilder();
+        Contact c = cb.buildContact();
+        addressPage.fillAddressData(c);
+        addressPage.chooseNthAddressFromSeection(1);
+        DeliveryPage deliveryPage = addressPage.continueWithSelectedAddress();
+        deliveryPage.selectDelivery(DeliveryPage.DeliveryMethod.STANDART);
+        PaymentPage paymentPage = deliveryPage.proceedWithSelectedDelivery();
+        paymentPage.addCreditCard(PaymentPage.PaymentMethod.CREDIT_CARD);
+        OrderSummaryPage summaryPage = paymentPage.submitNthCardAndContinue(1);
+        OrderCompletionPage completionPage = summaryPage.completePurchase();
+        assertThat("Wrong product name in order completion page", completionPage.getProductName(), containsString(name));
+        completionPage.returnToMainPage();
     }
 
 
