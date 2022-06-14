@@ -34,7 +34,7 @@ public class ParametrizedTests {
         return new Object[][]{{1}, {2}, {3}, {4}};
     }
 
-    @Test(dataProvider = "data-provider-2", priority =3)
+    @Test(dataProvider = "data-provider-2", priority =4)
     public void myTest(int val) {
         System.out.println("Passed Parameter Is : " + val);
     }
