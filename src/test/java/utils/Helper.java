@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.Properties;
@@ -30,7 +32,7 @@ public class Helper {
     // Retrieve property value from file
     public static String getProperty(String propName) {
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream(System.getProperty("propertiesFile"))) {
+        try (InputStream input = Files.newInputStream(Paths.get(System.getProperty("propertiesFile")))) {
             prop.load(input);
         } catch (IOException io) {
             io.printStackTrace();
