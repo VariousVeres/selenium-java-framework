@@ -2,22 +2,23 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 
-import org.testng.annotations.Test;
+import pages.CartPage;
 import pages.InventoryPage;
 import pages.LoginPage1;
 import utils.ConfigManager;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class LoginAndCartTest {
 
     private WebDriver webdriver;
 
-    @BeforeMethod
+    @BeforeClass
     public void setUpAndLogin() {
         webdriver = new ChromeDriver();
         webdriver.get(ConfigManager.baseUrl());
@@ -27,23 +28,24 @@ public class LoginAndCartTest {
         );
     }
 
-    @Test
-    public void addProductToCart() {
+    @Test(priority = 1)
+    public void userCanAddProductToCart() {
         InventoryPage inventory = new InventoryPage(webdriver);
-//        inventory.addFirstProductToCart();
-
-        // assert
+        inventory.addProductToCart("Sauce Labs Backpack");
+        inventory.clickOnShoppingCartLink();
+        CartPage cartPage = new CartPage(webdriver);
+        assertThat("Shopping cart page is not opened", cartPage.isShoppingCartOpened(), is(true));
+        assertThat("Shopping cart is empty", cartPage.isProductPresentInCart("Sauce Labs Backpack"), is(true));
     }
 
-    @Test
+    @Test(priority =2)
     public void removeProductFromCart() {
-        InventoryPage inventory = new InventoryPage(webdriver);
-//        inventory.removeFirstProductFromCart();
-
-        // assert
+        CartPage cartPage = new CartPage(webdriver);
+        cartPage.removeProductFromCart("Sauce Labs Backpack");
+        assertThat("Shopping cart is not empty", cartPage.isProductPresentInCart("Sauce Labs Backpack"), is(false));
     }
 
-    @AfterMethod
+    @AfterClass
     public void tearDown() {
         webdriver.quit();
     }

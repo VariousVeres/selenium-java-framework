@@ -10,6 +10,7 @@ import utils.ConfigManager;
 
 import java.util.Objects;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 //@Listeners({AllureListener.class})
@@ -30,7 +31,7 @@ public class LoginTest {
         loginPage = new LoginPage1(webdriver);
         loginPage.login(ConfigManager.username(), ConfigManager.password());
         inventoryPage = new InventoryPage(webdriver);
-        assertThat("Inventory container is not present in the inventory page", inventoryPage.isInventoryContainerPresent());
+        assertThat("Inventory container is not present in the inventory page", inventoryPage.isInventoryContainerPresent(), is(true));
 
     }
 
