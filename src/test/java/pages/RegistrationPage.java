@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.time.Duration;
 import java.util.List;
 
 public class RegistrationPage extends BasePage{
@@ -40,7 +41,7 @@ public class RegistrationPage extends BasePage{
         secretQuestionAnswersList.get(questionType - 1).click();
         secretQuestionAnswerInput.sendKeys(answer);
         submitRegistrationData.click();
-        myWait(3).until(ExpectedConditions.invisibilityOfElementLocated(By.id("submitRegistrationData")));
+        myWait(Duration.ofSeconds(3)).until(ExpectedConditions.invisibilityOfElementLocated(By.id("submitRegistrationData")));
         assertThat("Wrong login page url", driver.getCurrentUrl(), equalTo("http://localhost:3000/#/login"));
     }
 }

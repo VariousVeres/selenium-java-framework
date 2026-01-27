@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class PageObjectMainPage extends PageObjectBasePage {
     private WebDriver driver;
     public PageObjectMainPage(WebDriver driver) {
@@ -17,7 +19,7 @@ public class PageObjectMainPage extends PageObjectBasePage {
     By goToLoginPageButton = By.xpath("//button[@aria-label='Go to login page']");
 
     public WebDriverWait explicitWait() {
-        return new WebDriverWait(driver, 10);
+        return new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public void dismissWelcomeBanner()  {

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -77,7 +78,7 @@ public class MainPage extends BasePage {
     @Step
     public void clickOnNthProduct(int i) {
         productsPanelsList.get(i - 1).click();
-        myWait(1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//mat-dialog-container/app-product-details/mat-dialog-content")));
+        myWait(Duration.ofSeconds(1)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//mat-dialog-container/app-product-details/mat-dialog-content")));
     }
     @Step
     public void addProductReview(String review) {
@@ -93,7 +94,7 @@ public class MainPage extends BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         //Scroll down till the bottom of the block
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-        myWait(3).until(ExpectedConditions.elementToBeClickable(By.xpath("//mat-dialog-container/app-product-details//button[@aria-label='Close Dialog']")));
+        myWait(Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(By.xpath("//mat-dialog-container/app-product-details//button[@aria-label='Close Dialog']")));
         reviewBlockCloseButton.click();
     }
     @Step
@@ -119,7 +120,7 @@ public class MainPage extends BasePage {
     @Step
     public BasketPage openBasket() {
         basketButton.click();
-        myWait(3).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button#checkoutButton")));
+        myWait(Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button#checkoutButton")));
         return new BasketPage(driver);
     }
 

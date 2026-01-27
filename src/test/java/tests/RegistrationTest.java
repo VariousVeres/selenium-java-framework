@@ -37,9 +37,14 @@ public class RegistrationTest {
 //        options.addArguments("--headless", "--window-size=1920,1650");
 //        options.addArguments("--incognito");
         options.addExtensions(new File(System.getProperty("dataFolder") + File.separator + Helper.getProperty("fake_filler_file_name")));
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        driver = new ChromeDriver(capabilities);
+        options.addArguments("--disable-notifications");
+        options.addArguments("--start-maximized");
+
+        WebDriver driver = new ChromeDriver(options);
+
+
+//        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        driver = new ChromeDriver(options);
         setDriverIntoContext(iTestContext, driver);
         //Uncomment for more complicated driver with options
 //        driver = Helper.createDriverWithOptions();

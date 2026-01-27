@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.time.Duration;
+
 public class BasketPage extends BasePage{
     WebDriver driver;
 
@@ -21,7 +23,7 @@ public class BasketPage extends BasePage{
 
 
     public AddressPage clickCheckout() {
-        myWait(3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='checkoutButton' and not(@disabled)]")));
+        myWait(Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='checkoutButton' and not(@disabled)]")));
         checkoutButton.click();
         return new AddressPage(driver);
     }

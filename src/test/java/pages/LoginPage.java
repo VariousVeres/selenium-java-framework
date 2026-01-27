@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.time.Duration;
+
 public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
@@ -32,7 +34,7 @@ public class LoginPage extends BasePage {
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         loginButton.click();
-        myWait(5).until(ExpectedConditions.urlContains("search"));
+        myWait(Duration.ofSeconds(5)).until(ExpectedConditions.urlContains("search"));
         return new MainPage(driver);
     }
 

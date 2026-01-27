@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.time.Duration;
+
 public class OrderSummaryPage extends BasePage {
     OrderSummaryPage(WebDriver driver) {
         super(driver);
@@ -16,7 +18,7 @@ public class OrderSummaryPage extends BasePage {
 
     public OrderCompletionPage completePurchase() {
         completePurchaseButton.click();
-        myWait(3).until(driver->driver.getCurrentUrl().contains("order-completion"));
+        myWait(Duration.ofSeconds(3)).until(driver->driver.getCurrentUrl().contains("order-completion"));
         return new OrderCompletionPage(driver);
     }
 }
