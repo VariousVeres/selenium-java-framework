@@ -21,6 +21,7 @@ public class LoginAndCartTest {
     @BeforeClass
     public void setUpAndLogin() {
         webdriver = new ChromeDriver();
+        webdriver.manage().window().maximize();
         webdriver.get(ConfigManager.baseUrl());
         new LoginPage1(webdriver).login(
                 ConfigManager.username(),
@@ -30,6 +31,9 @@ public class LoginAndCartTest {
 
     @Test(priority = 1)
     public void userCanAddProductToCart() {
+        System.out.println(
+                "Thread: " + Thread.currentThread().getId()
+        );
         InventoryPage inventory = new InventoryPage(webdriver);
         inventory.addProductToCart("Sauce Labs Backpack");
         inventory.clickOnShoppingCartLink();

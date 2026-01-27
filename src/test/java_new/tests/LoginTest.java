@@ -20,14 +20,18 @@ public class LoginTest {
     InventoryPage inventoryPage;
     WebDriver webdriver;
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() {
         webdriver = new ChromeDriver();
     }
 
     @Test(priority = 1)
     public void shouldLoginSuccessfully() {
+        System.out.println(
+                "Thread: " + Thread.currentThread().getId()
+        );
         webdriver.get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
+        webdriver.manage().window().maximize();
         loginPage = new LoginPage1(webdriver);
         loginPage.login(ConfigManager.username(), ConfigManager.password());
         inventoryPage = new InventoryPage(webdriver);
@@ -35,7 +39,7 @@ public class LoginTest {
 
     }
 
-    @AfterMethod
+    @AfterClass
     public void tearDown() {
         webdriver.quit();
     }
