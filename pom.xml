@@ -9,10 +9,10 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <url>http://localhost:3000</url>
+        <url>https://www.saucedemo.com</url>
+        <config>src/test/config</config>
         <resourcesFolder>src/test/resources</resourcesFolder>
         <aspectj.version>1.9.6</aspectj.version>
-        <!--<allure-testng-version>2.13.9</allure-testng-version>-->
     </properties>
 
     <dependencies>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>4.17.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
@@ -111,8 +111,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
 
@@ -130,8 +130,8 @@
                         <suiteXmlFile>${resourcesFolder}/main_tests_test_ng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <propertiesFile>${resourcesFolder}/properties/config.properties</propertiesFile>
-                        <dataFolder>${resourcesFolder}/data</dataFolder>
+                        <project.root>${project.basedir}</project.root>
+                        <config>${config}</config>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>
