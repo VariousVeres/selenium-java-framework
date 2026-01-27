@@ -3,9 +3,7 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.LoginPage1;
 import utils.ConfigManager;
 import java.util.Objects;
@@ -16,7 +14,7 @@ public class MainTest1 {
     LoginPage1 loginPage;
     WebDriver webdriver;
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() {
         webdriver = new ChromeDriver();
     }
@@ -29,7 +27,7 @@ public class MainTest1 {
 
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         webdriver.quit();
     }
