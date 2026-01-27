@@ -25,7 +25,7 @@ public class LoginTest {
     }
 
     @Test(priority = 1)
-    public void login() {
+    public void shouldLoginSuccessfully() {
         webdriver.get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
         loginPage = new LoginPage1(webdriver);
         loginPage.login(ConfigManager.username(), ConfigManager.password());
