@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Login test with browser">
+
+    <parameter name="browser" value="firefox"/>
+
+    <test name="Login tests">
+        <classes>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
+
+</suite>

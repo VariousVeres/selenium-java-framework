@@ -3,6 +3,7 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
 import pages.InventoryPage;
 import pages.LoginPage1;
@@ -22,8 +23,13 @@ public class LoginTest {
     WebDriver webdriver;
 
     @BeforeClass
-    public void setUp() {
-        webdriver = new ChromeDriver(ChromeOptionsHelper.getChromeOptions());
+    @Parameters("browser")
+    public void setUp(String browser) {
+        if (browser.equals("chrome")) {
+            webdriver = new ChromeDriver(ChromeOptionsHelper.getChromeOptions());
+        } else if (browser.equals("firefox")) {
+            webdriver = new FirefoxDriver();
+        }
     }
 
     @DataProvider
