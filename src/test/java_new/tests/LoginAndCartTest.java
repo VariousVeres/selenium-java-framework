@@ -2,12 +2,14 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
 
 
 import pages.CartPage;
 import pages.InventoryPage;
 import pages.LoginPage1;
+import utils.ChromeOptionsHelper;
 import utils.ConfigManager;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -20,8 +22,7 @@ public class LoginAndCartTest {
 
     @BeforeClass
     public void setUpAndLogin() {
-        webdriver = new ChromeDriver();
-        webdriver.manage().window().maximize();
+        webdriver = new ChromeDriver(ChromeOptionsHelper.getChromeOptions());
         webdriver.get(ConfigManager.baseUrl());
         new LoginPage1(webdriver).login(
                 ConfigManager.username(),
@@ -42,8 +43,11 @@ public class LoginAndCartTest {
         assertThat("Shopping cart is empty", cartPage.isProductPresentInCart("Sauce Labs Backpack"), is(true));
     }
 
-    @Test(priority =2)
+    @Test(priority = 2)
     public void removeProductFromCart() {
+        System.out.println(
+                "Thread: " + Thread.currentThread().getId()
+        );
         CartPage cartPage = new CartPage(webdriver);
         cartPage.removeProductFromCart("Sauce Labs Backpack");
         assertThat("Shopping cart is not empty", cartPage.isProductPresentInCart("Sauce Labs Backpack"), is(false));

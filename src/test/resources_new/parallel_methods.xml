@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="UI Regression Suite">
-
-    <test name="Cart tests">
+<suite name="UI Regression Suite"
+       parallel="methods"
+       thread-count="3">
+    <test name="UI Tests">
         <classes>
             <class name="tests.LoginAndCartTest"/>
+            <class name="tests.LoginTest"/>
         </classes>
     </test>
-
 </suite>

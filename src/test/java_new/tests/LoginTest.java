@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import pages.InventoryPage;
 import pages.LoginPage1;
+import utils.ChromeOptionsHelper;
 import utils.ConfigManager;
 
 import java.util.Objects;
@@ -22,7 +23,7 @@ public class LoginTest {
 
     @BeforeClass
     public void setUp() {
-        webdriver = new ChromeDriver();
+        webdriver = new ChromeDriver(ChromeOptionsHelper.getChromeOptions());
     }
 
     @Test(priority = 1)
@@ -31,7 +32,6 @@ public class LoginTest {
                 "Thread: " + Thread.currentThread().getId()
         );
         webdriver.get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
-        webdriver.manage().window().maximize();
         loginPage = new LoginPage1(webdriver);
         loginPage.login(ConfigManager.username(), ConfigManager.password());
         inventoryPage = new InventoryPage(webdriver);
