@@ -2,4 +2,4 @@
 target/
 test-output/
 .idea/
-.allure/
+allure-results/
