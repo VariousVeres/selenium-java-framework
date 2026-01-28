@@ -26,17 +26,43 @@ public class LoginTest {
         webdriver = new ChromeDriver(ChromeOptionsHelper.getChromeOptions());
     }
 
-    @Test(priority = 1)
-    public void shouldLoginSuccessfully() {
+    @DataProvider
+    public Object[][] correctLoginData() {
+        return new Object[][]{
+                {ConfigManager.username(), ConfigManager.password()},
+                {"visual_user", ConfigManager.password()}
+        };
+    }
+
+    @Test(dataProvider = "correctLoginData")
+    public void shouldCorrectLoginSuccessfully(String user, String password) {
         System.out.println(
                 "Thread: " + Thread.currentThread().getId()
         );
         webdriver.get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
         loginPage = new LoginPage1(webdriver);
-        loginPage.login(ConfigManager.username(), ConfigManager.password());
+        loginPage.login(user, password);
         inventoryPage = new InventoryPage(webdriver);
         assertThat("Inventory container is not present in the inventory page", inventoryPage.isInventoryContainerPresent(), is(true));
+    }
 
+    @DataProvider
+    public Object[][] wrongLoginData() {
+        return new Object[][]{
+                {ConfigManager.username(), "wrong_password"},
+                {"wrong_user", ConfigManager.password()}
+        };
+    }
+
+    @Test(dataProvider = "wrongLoginData")
+    public void shouldWrongLoginUnsuccessful(String user, String password) {
+        System.out.println(
+                "Thread: " + Thread.currentThread().getId()
+        );
+        webdriver.get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
+        loginPage = new LoginPage1(webdriver);
+        loginPage.login(user, password);
+        assertThat("Login with incorrect data was successful", loginPage.isDataTestErrorPresentOnPage(), is(true));
     }
 
     @AfterClass
