@@ -1,6 +1,5 @@
 package tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +15,6 @@ public class ParalellTests {
     public void ChromeTest() {
         //Initialize the chrome driver
         System.out.println("The thread ID for Chrome is "+ Thread.currentThread().getId());
-        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("https://www.google.com");
         driver.findElement(By.xpath("//input[@aria-label='Пошук']")).sendKeys("Henlo");

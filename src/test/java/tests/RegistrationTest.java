@@ -4,14 +4,12 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.LoginPage;
@@ -31,7 +29,6 @@ public class RegistrationTest {
 
     @BeforeSuite
     public void driverInitialization(ITestContext iTestContext) {
-        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         //Uncomment for headless or incognito browser
 //        options.addArguments("--headless", "--window-size=1920,1650");
