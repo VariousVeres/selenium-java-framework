@@ -11,9 +11,8 @@ public class TeamsApiTest {
     @Test
     public void shouldReturnCorrectTeams() {
         TeamsClient teamsClient = new TeamsClient();
-        Response response = teamsClient.getTeams();
 
-        response.then()
+        teamsClient.getTeams().then()
                 .body("count", is(1))
                 .body("results", hasSize(1))
                 .body("results[0].group.name", is("Default line of business"))
