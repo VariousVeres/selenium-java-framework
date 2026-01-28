@@ -1,6 +1,5 @@
 package tests;
 
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import tests.api.TeamsClient;
 
