@@ -30,9 +30,9 @@ public class TeamsTestData {
         linksMap.put("last", "https://api.eu-central-1.saucelabs.com/team-management/v1/teams?limit=20&offset=0");
 
         TeamsResponse response = new TeamsResponse();
+        response.setLinks(linksMap);
         response.setCount(1);
         response.setResults(List.of(team));
-        response.setLinks(linksMap);
         return response;
     }
 }
