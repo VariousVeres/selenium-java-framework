@@ -1,5 +1,6 @@
 package tests;
 
+import com.google.gson.Gson;
 import io.restassured.response.Response;
 import models.responses_wrappers.TeamsResponse;
 import org.testng.annotations.Test;
@@ -15,7 +16,8 @@ public class TeamsApiTest {
     public void shouldReturnCorrectTeams() {
         TeamsClient teamsClient = new TeamsClient();
 
-        TeamsResponse teamsResponse = teamsClient.getTeams().then()
+        Response response
+                = teamsClient.getTeams().then()
                 .body("count", is(1))
                 .body("results", hasSize(1))
                 .body("results[0].group.name", is("Default line of business"))
@@ -24,10 +26,17 @@ public class TeamsApiTest {
                 .body("results[0].settings.real_devices", greaterThan(0))
                 .body("results[0].settings.virtual_machines", greaterThan(0))
                 .body("results[0].settings.live_only", is(false))
-                .body("results[0].user_count", is(1)).extract().as(TeamsResponse.class);
+                .body("results[0].user_count", is(1)).extract().response();
 
+        TeamsResponse teamsResponse = response.as(TeamsResponse.class);
         TeamsResponse expected = TeamsTestData.defaultTeamResponse();
         assertThat("Response is invalid", teamsResponse, is(expected));
+
+        String teamResponseString = response.asString();
+        Gson gson = new Gson();
+        TeamsResponse expectedFromJSON = gson.fromJson(teamResponseString, TeamsResponse.class);
+
+        assertThat("Response is invalid", teamsResponse, is(expectedFromJSON));
 
     }
 }
