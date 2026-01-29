@@ -17,6 +17,7 @@ public abstract class BaseTeam {
     protected Settings settings;
     protected TeamsGroup teamsGroup;
     protected boolean is_default;
+
     protected String name;
     protected String org_uuid;
 

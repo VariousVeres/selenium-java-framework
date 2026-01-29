@@ -12,8 +12,8 @@ import java.util.Objects;
  */
 
 public class TeamsGroup {
-    private String id;
-    private String name;
+    protected String id;
+    protected String name;
 
     public TeamsGroup() {
         // For Jackson only

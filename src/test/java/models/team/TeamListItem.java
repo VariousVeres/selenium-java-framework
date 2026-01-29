@@ -4,12 +4,12 @@ import java.util.Objects;
 
 /**
  * Team representation returned by GET /teams (list endpoint).
- *
+ * <p>
  * Extends {@link BaseTeam} with list-specific fields.
- *
+ * <p>
  * Contains {@code user_count}, which represents the number of users
  * assigned to the team and is available only in the list response.
- *
+ * <p>
  * Used as an item inside {@link TeamsResponse}.
  */
 
@@ -44,19 +44,19 @@ public class TeamListItem extends BaseTeam {
                 && Objects.equals(name, that.name)
                 && Objects.equals(org_uuid, that.org_uuid)
                 && Objects.equals(settings, that.settings)
-                && Objects.equals(teamsGroup, that.teamsGroup);
+                && Objects.equals(getGroup(), that.getGroup());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
+                user_count,
                 id,
                 name,
                 org_uuid,
                 settings,
                 teamsGroup,
-                is_default,
-                user_count
+                is_default
         );
     }
 
