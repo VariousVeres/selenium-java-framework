@@ -1,5 +1,14 @@
 package models.team;
 
+/**
+ * Extended group representation returned in GET /teams/{id}.
+ * Extends {@link TeamsGroup} with capacity-related fields.
+ *
+ * Additional fields:
+ * - real_devices
+ * - virtual_machines
+ */
+
 public class TeamDetailsGroup extends TeamsGroup{
     private int real_devices;
     private int virtual_machines;

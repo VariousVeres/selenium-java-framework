@@ -2,6 +2,15 @@ package models.team;
 
 import java.util.Objects;
 
+/**
+ * Group representation returned in GET /teams (list endpoint).
+ * Contains only basic identification fields.
+ *
+ * Fields:
+ * - id
+ * - name
+ */
+
 public class TeamsGroup {
     private String id;
     private String name;
