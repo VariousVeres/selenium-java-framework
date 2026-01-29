@@ -1,5 +1,16 @@
 package models.team;
 
+/**
+ * Base representation of a Team shared across multiple API read-models.
+ *
+ * Contains fields common for both:
+ * - GET /teams (list)
+ * - GET /teams/{id} (details)
+ *
+ * This class is not used directly as an API response,
+ * but serves as a base for concrete DTOs.
+ */
+
 public abstract class BaseTeam {
 
     protected String id;
