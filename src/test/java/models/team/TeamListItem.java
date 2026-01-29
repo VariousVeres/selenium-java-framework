@@ -1,25 +1,19 @@
-package models;
+package models.team;
 
 import java.util.Objects;
 
-public class Team {
+public class TeamListItem extends BaseTeam {
 
-    private String id;
-    private Settings settings;
-    private Group group;
-    private boolean is_default;
-    private String name;
-    private String org_uuid;
     private int user_count;
 
-    public Team() {
+    public TeamListItem() {
         // For Jackson only
     }
 
-    private Team(TeamBuilder builder) {
+    private TeamListItem(TeamBuilder builder) {
         this.id = builder.id;
         this.settings = builder.settings;
-        this.group = builder.group;
+        this.teamsGroup = builder.teamsGroup;
         this.is_default = builder.isDefault;
         this.name = builder.name;
         this.org_uuid = builder.orgUuid;
@@ -29,45 +23,32 @@ public class Team {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Team team = (Team) o;
-        return is_default == team.is_default &&
-                user_count == team.user_count &&
-                Objects.equals(id, team.id) &&
-                Objects.equals(settings, team.settings) &&
-                Objects.equals(group, team.group) &&
-                Objects.equals(name, team.name) &&
-                Objects.equals(org_uuid, team.org_uuid);
+        if (!(o instanceof TeamListItem)) return false;
+
+        TeamListItem that = (TeamListItem) o;
+
+        return is_default == that.is_default
+                && user_count == that.user_count
+                && Objects.equals(id, that.id)
+                && Objects.equals(name, that.name)
+                && Objects.equals(org_uuid, that.org_uuid)
+                && Objects.equals(settings, that.settings)
+                && Objects.equals(teamsGroup, that.teamsGroup);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, settings, group, is_default, name, org_uuid, user_count);
+        return Objects.hash(
+                id,
+                name,
+                org_uuid,
+                settings,
+                teamsGroup,
+                is_default,
+                user_count
+        );
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public boolean isIs_default() {
-        return is_default;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getOrg_uuid() {
-        return org_uuid;
-    }
 
     public int getUser_count() {
         return user_count;
@@ -77,11 +58,12 @@ public class Team {
         return new TeamBuilder();
     }
 
+
     public static class TeamBuilder {
 
         private String id;
         private Settings settings;
-        private Group group;
+        private TeamsGroup teamsGroup;
         private boolean isDefault;
         private String name;
         private String orgUuid;
@@ -97,8 +79,8 @@ public class Team {
             return this;
         }
 
-        public TeamBuilder group(Group group) {
-            this.group = group;
+        public TeamBuilder group(TeamsGroup teamsGroup) {
+            this.teamsGroup = teamsGroup;
             return this;
         }
 
@@ -122,8 +104,8 @@ public class Team {
             return this;
         }
 
-        public Team build() {
-            return new Team(this);
+        public TeamListItem build() {
+            return new TeamListItem(this);
         }
     }
 }

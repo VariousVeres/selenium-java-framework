@@ -1,6 +1,6 @@
 package models.responses_wrappers;
 
-import models.Team;
+import models.team.TeamListItem;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -10,7 +10,7 @@ public class TeamsResponse {
 
     private Map<String, String> links;
     private int count;
-    private List<Team> results;
+    private List<TeamListItem> results;
 
 
     @Override
@@ -44,11 +44,11 @@ public class TeamsResponse {
         this.count = count;
     }
 
-    public List<Team> getResults() {
+    public List<TeamListItem> getResults() {
         return results;
     }
 
-    public void setResults(List<Team> results) {
+    public void setResults(List<TeamListItem> results) {
         this.results = results;
     }
 

@@ -1,16 +1,16 @@
-package models;
+package models.team;
 
 import java.util.Objects;
 
-public class Group {
+public class TeamsGroup {
     private String id;
     private String name;
 
-    public Group() {
+    public TeamsGroup() {
         // For Jackson only
     }
 
-    public Group(String id, String name) {
+    public TeamsGroup(String id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -18,8 +18,8 @@ public class Group {
     @Override
     public boolean equals(Object obj) {
         if(this==obj) return true;
-        if(!(obj instanceof Group)) return false;
-        Group g = (Group) obj;
+        if(!(obj instanceof TeamsGroup)) return false;
+        TeamsGroup g = (TeamsGroup) obj;
         return Objects.equals(g.id, this.id) &&
                 Objects.equals(g.name, this.name);
     }
