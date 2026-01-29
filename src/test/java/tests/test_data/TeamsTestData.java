@@ -3,7 +3,7 @@ package tests.test_data;
 import models.team.TeamsGroup;
 import models.team.Settings;
 import models.team.TeamListItem;
-import models.responses_wrappers.TeamsResponse;
+import models.team.TeamsResponse;
 
 import java.util.HashMap;
 import java.util.List;

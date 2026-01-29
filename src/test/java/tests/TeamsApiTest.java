@@ -2,8 +2,7 @@ package tests;
 
 import io.restassured.response.Response;
 import models.team.TeamDetails;
-import models.team.TeamListItem;
-import models.responses_wrappers.TeamsResponse;
+import models.team.TeamsResponse;
 import org.testng.annotations.Test;
 import tests.api.TeamsClient;
 import tests.test_data.TeamsTestData;

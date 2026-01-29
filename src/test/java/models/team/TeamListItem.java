@@ -2,6 +2,17 @@ package models.team;
 
 import java.util.Objects;
 
+/**
+ * Team representation returned by GET /teams (list endpoint).
+ *
+ * Extends {@link BaseTeam} with list-specific fields.
+ *
+ * Contains {@code user_count}, which represents the number of users
+ * assigned to the team and is available only in the list response.
+ *
+ * Used as an item inside {@link TeamsResponse}.
+ */
+
 public class TeamListItem extends BaseTeam {
 
     private int user_count;

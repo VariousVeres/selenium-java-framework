@@ -1,12 +1,23 @@
-package models.responses_wrappers;
+package models.team;
 
-import models.team.TeamListItem;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 
 public class TeamsResponse {
+
+    /**
+     * Wrapper object for GET /teams (list endpoint) response.
+     *
+     * Contains:
+     * - {@code links}  : pagination or navigation links
+     * - {@code count}  : total number of teams returned
+     * - {@code results}: list of {@link TeamListItem} objects
+     *
+     * This class represents the top-level API response
+     * and is not used for single team endpoints.
+     */
 
     private Map<String, String> links;
     private int count;
