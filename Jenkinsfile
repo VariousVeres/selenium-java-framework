@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn -B clean test -DsuiteXmlFile=src/test/resources/pair_classes.xml'
+                sh 'mvn clean test -DsuiteXmlFile=src/test/resources/pair_classes.xml'
             }
         }
 //         stage('Deploy') {
