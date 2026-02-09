@@ -2,13 +2,13 @@ pipeline {
     agent any
     parameters {
 
-           choice(name: 'Suite file', choices: ['api_tests.xml', 'pair_classes.xml',], description: 'Pick file for run')
+           choice(name: 'SUITE', choices: ['api_tests.xml', 'pair_classes.xml',], description: 'Pick file for run')
 
         }
     stages {
-        stage('Build') {
+        stage('Echoing parameters') {
             steps {
-            echo 'Test stage Build placeholder'
+            echo "Selected suite: ${params.SUITE}"
             }
         }
         stage("SCM Checkout"){
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'mvn clean test -DsuiteXmlFile=src/test/resources/pair_classes.xml'
+                bat 'mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}'
             }
         }
 //         stage('Deploy') {
