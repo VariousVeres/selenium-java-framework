@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-            echo 'Test stage placeholder'
+            echo 'Test stage Build placeholder'
             }
         }
         stage('Test') {
@@ -11,10 +11,10 @@ pipeline {
                 sh 'mvn -B clean test -DsuiteXmlFile=src/test/resources/pair_classes.xml'
             }
         }
-        stage('Deploy') {
-            steps {
-             echo 'Test stage placeholder'
-            }
-        }
+//         stage('Deploy') {
+//             steps {
+//              echo 'Test stage placeholder'
+//             }
+//         }
     }
 }
