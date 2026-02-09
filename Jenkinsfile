@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    parameters {
+
+           choice(name: 'Suite file', choices: ['api_tests.xml', 'pair_classes.xml',], description: 'Pick file for run')
+
+        }
     stages {
         stage('Build') {
             steps {
