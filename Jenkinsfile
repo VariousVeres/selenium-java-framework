@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
 
-           choice(name: 'SUITE', choices: ['api_tests.xml', 'pair_classes.xml',], description: 'Pick file for run')
+           choice(name: 'SUITE', choices: ['parallel_methods.xml', 'pair_classes.xml',], description: 'Pick file for run')
 
         }
     stages {
