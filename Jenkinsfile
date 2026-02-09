@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}'
+                bat "mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
             }
         }
 //         stage('Deploy') {
