@@ -8,7 +8,7 @@ pipeline {
         }
         stage("SCM Checkout"){
             steps{
-            git 'https://github.com/VariousVeres/selenium-java-framework.git'
+            git 'https://github.com/VariousVeres/selenium-java-framework'
             }
         }
         stage('Test') {
