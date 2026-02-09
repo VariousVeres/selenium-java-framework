@@ -3,17 +3,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean test -DsuiteXmlFile=src/test/resources/pair_classes.xml'
+            echo 'Test stage placeholder'
             }
         }
         stage('Test') {
             steps {
-                //
+                sh 'mvn -B clean test -DsuiteXmlFile=src/test/resources/pair_classes.xml'
             }
         }
         stage('Deploy') {
             steps {
-                //
+             echo 'Test stage placeholder'
             }
         }
     }
