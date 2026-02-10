@@ -1,9 +1,9 @@
 package tests.test_data;
 
-import models.Group;
-import models.Settings;
-import models.Team;
-import models.responses_wrappers.TeamsResponse;
+import models.team.TeamsGroup;
+import models.team.Settings;
+import models.team.TeamListItem;
+import models.team.TeamsResponse;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,11 +13,11 @@ public class TeamsTestData {
 
     public static TeamsResponse defaultTeamResponse() {
 
-        Team.TeamBuilder teamBuilder = Team.builder();
-        Team team = teamBuilder.
+        TeamListItem.TeamBuilder teamBuilder = TeamListItem.builder();
+        TeamListItem team = teamBuilder.
                 id("9ecf1eb535ca4c798eb834b3c101a57d")
                 .settings(new Settings(false, 1, 1))
-                .group(new Group("531a28500ca245748360f5e9ad51d131", "Default line of business"))
+                .group(new TeamsGroup("531a28500ca245748360f5e9ad51d131", "Default line of business"))
                 .isDefault(true)
                 .name("Default team")
                 .orgUuid("b123f8cf07c84762b2cb73951ce06c4c")
