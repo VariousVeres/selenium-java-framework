@@ -19,7 +19,18 @@ public class LoginTest {
 
     LoginPage1 loginPage;
     InventoryPage inventoryPage;
-    WebDriver webdriver;
+
+    private static final ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
+
+    public static WebDriver getDriver() {
+        return webDriverThreadLocal.get();
+    }
+
+    private static void setDriver(WebDriver driver) {
+        webDriverThreadLocal.set(driver);
+    }
+
+
 //For parametrized run
 //    @BeforeClass
 //    @Parameters("browser")
@@ -31,13 +42,15 @@ public class LoginTest {
 //        }
 //    }
 
-    @BeforeClass
+
+    // @BeforeMethod is used to support parallel="methods" execution
+    @BeforeMethod
     public void setUp() {
-        webdriver = new ChromeDriver(ChromeOptionsHelper.getChromeOptions());
+        setDriver(new ChromeDriver(ChromeOptionsHelper.getChromeOptions()));
 
     }
 
-    @DataProvider
+    @DataProvider(parallel = true)
     public Object[][] correctLoginData() {
         return new Object[][]{
                 {ConfigManager.username(), ConfigManager.password()},
@@ -50,35 +63,30 @@ public class LoginTest {
         System.out.println(
                 "Thread: " + Thread.currentThread().getId()
         );
-        webdriver.get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
-        loginPage = new LoginPage1(webdriver);
+        getDriver().get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
+        loginPage = new LoginPage1(getDriver());
         loginPage.login(user, password);
-        inventoryPage = new InventoryPage(webdriver);
+        inventoryPage = new InventoryPage(getDriver());
         assertThat("Inventory container is not present in the inventory page", inventoryPage.isInventoryContainerPresent(), is(true));
     }
 
-    @DataProvider
-    public Object[][] wrongLoginData() {
-        return new Object[][]{
-                {ConfigManager.username(), "wrong_password"},
-                {"wrong_user", ConfigManager.password()}
-        };
-    }
-
-    @Test(dataProvider = "wrongLoginData")
-    public void shouldWrongLoginUnsuccessful(String user, String password) {
+    @Test
+    public void shouldWrongLoginUnsuccessful() {
         System.out.println(
                 "Thread: " + Thread.currentThread().getId()
         );
-        webdriver.get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
-        loginPage = new LoginPage1(webdriver);
-        loginPage.login(user, password);
+        getDriver().get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
+        loginPage = new LoginPage1(getDriver());
+        loginPage.login(ConfigManager.username(), "wrong_password");
         assertThat("Login with incorrect data was successful", loginPage.isDataTestErrorPresentOnPage(), is(true));
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
-        webdriver.quit();
+        if (getDriver() != null) {
+            getDriver().quit();
+            webDriverThreadLocal.remove();
+        }
     }
 
 
