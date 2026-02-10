@@ -5,10 +5,6 @@ pipeline {
            choice(name: 'SUITE', choices: ['parallel_methods.xml', 'pair_classes.xml',], description: 'Pick file for run')
 
         }
-
-    tools {
-                jdk 'jdk17'
-    }
     stages {
         stage('Echoing parameters') {
             steps {
