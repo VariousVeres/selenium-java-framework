@@ -3,6 +3,7 @@
 <suite name="UI Regression Suite"
        parallel="methods"
        thread-count="3">
+    <!--Works unstable-->
     <test name="UI Tests">
         <classes>
             <class name="tests.LoginAndCartTest"/>
