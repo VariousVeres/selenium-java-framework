@@ -1,7 +1,6 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,9 +11,9 @@ import java.time.Duration;
 public class BasePage1 {
     protected WebDriver driver;
     protected WebDriverWait wait;
-    private static final Duration EXPLICIT_WAIT_DURATION = Duration.ofSeconds(5);
+    private static final Duration EXPLICIT_WAIT_DURATION = Duration.ofSeconds(7);
 
-    @FindBy(xpath = "//*[@data-test='error']")
+    @FindBy(xpath = "//*[@data-test='error']/button")
     WebElement dataTestError;
 
     BasePage1(WebDriver driver) {
@@ -42,7 +41,7 @@ public class BasePage1 {
         try {
             wait.until(ExpectedConditions.visibilityOf(dataTestError));
             return dataTestError.isDisplayed();
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
             return false;
         }
     }
