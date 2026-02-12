@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-           choice(name: 'SUITE', choices: ['pair_classes.xml', 'parallel_methods.xml'], description: 'Pick xml file for run')
+           choice(name: 'SUITE', choices: ['pair_classes.xml'], description: 'Pick xml file for run')
        }
     stages {
         stage('Echoing parameters') {
