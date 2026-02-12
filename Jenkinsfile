@@ -11,20 +11,14 @@ pipeline {
             echo "Selected suite: ${params.SUITE}"
             }
         }
-        stage("SCM Checkout"){
-            steps{
-            git 'https://github.com/VariousVeres/selenium-java-framework'
-            }
-        }
+//         stage("SCM Checkout"){
+//             steps{
+//             git 'https://github.com/VariousVeres/selenium-java-framework'
+//             }
+//         }
         stage('Test') {
             steps {
                 bat "mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
-            }
-        }
-        stage('Debug') {
-            steps {
-                bat 'dir target'
-                bat 'dir target\\allure-results'
             }
         }
         stage('Deploy reports') {
