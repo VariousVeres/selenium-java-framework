@@ -27,7 +27,7 @@ pipeline {
                 bat 'dir target\\allure-results'
             }
         }
-        stage('Deploy') {
+        stage('Deploy reports') {
             steps {
              allure includeProperties:
              false, jdk: '',
