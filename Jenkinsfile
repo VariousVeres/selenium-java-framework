@@ -11,7 +11,9 @@ pipeline {
         }
         stage('Test') {
             steps {
+              catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                 bat "mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
+                }
             }
         }
         stage('Deploy reports') {
