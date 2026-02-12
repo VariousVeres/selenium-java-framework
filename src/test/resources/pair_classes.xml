@@ -3,6 +3,9 @@
 <suite name="Parallel test classes"
        parallel="classes"
        thread-count="2">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
 
     <test name="UI Tests">
         <classes>
