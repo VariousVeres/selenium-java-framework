@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
@@ -38,6 +39,7 @@ public class LoginAndCartTest extends BaseTest{
     }
 
     @Test(priority = 1)
+    @Step("Add product to cart")
     public void userCanAddProductToCart() {
         InventoryPage inventory = new InventoryPage(getDriver());
         inventory.addProductToCart("Sauce Labs Backpack");
@@ -49,6 +51,7 @@ public class LoginAndCartTest extends BaseTest{
     }
 
     @Test(priority = 2)
+    @Step("Remove product from cart")
     public void removeProductFromCart() {
         CartPage cartPage = new CartPage(getDriver());
         cartPage.removeProductFromCart("Sauce Labs Backpack");

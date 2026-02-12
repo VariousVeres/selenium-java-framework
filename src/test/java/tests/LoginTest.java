@@ -1,6 +1,7 @@
 package tests;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
@@ -58,6 +59,7 @@ public class LoginTest extends BaseTest{
     }
 
     @Test(dataProvider = "correctLoginData")
+    @Step("Login with user: {user}")
     public void shouldCorrectLoginSuccessfully(String user, String password) {
         getDriver().get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
         loginPage = new LoginPage1(getDriver());
@@ -68,6 +70,7 @@ public class LoginTest extends BaseTest{
     }
 
     @Test
+    @Step("Login with wrong user")
     public void shouldWrongLoginUnsuccessful() {
         getDriver().get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
         loginPage = new LoginPage1(getDriver());
