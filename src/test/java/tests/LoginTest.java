@@ -59,9 +59,6 @@ public class LoginTest extends BaseTest{
 
     @Test(dataProvider = "correctLoginData")
     public void shouldCorrectLoginSuccessfully(String user, String password) {
-        System.out.println(
-                "Thread: " + Thread.currentThread().getId()
-        );
         getDriver().get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
         loginPage = new LoginPage1(getDriver());
         loginPage.login(user, password);
@@ -72,9 +69,6 @@ public class LoginTest extends BaseTest{
 
     @Test
     public void shouldWrongLoginUnsuccessful() {
-        System.out.println(
-                "Thread: " + Thread.currentThread().getId()
-        );
         getDriver().get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
         loginPage = new LoginPage1(getDriver());
         loginPage.login(ConfigManager.username(), "wrong_password");

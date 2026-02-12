@@ -39,9 +39,6 @@ public class LoginAndCartTest extends BaseTest{
 
     @Test(priority = 1)
     public void userCanAddProductToCart() {
-        System.out.println(
-                "Thread: " + Thread.currentThread().getId()
-        );
         InventoryPage inventory = new InventoryPage(getDriver());
         inventory.addProductToCart("Sauce Labs Backpack");
         inventory.clickOnShoppingCartLink();
@@ -53,9 +50,6 @@ public class LoginAndCartTest extends BaseTest{
 
     @Test(priority = 2)
     public void removeProductFromCart() {
-        System.out.println(
-                "Thread: " + Thread.currentThread().getId()
-        );
         CartPage cartPage = new CartPage(getDriver());
         cartPage.removeProductFromCart("Sauce Labs Backpack");
         assertThat("Shopping cart is not empty", cartPage.isProductPresentInCart("Sauce Labs Backpack"), is(false));
