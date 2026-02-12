@@ -105,7 +105,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <release>17</release>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
 
@@ -126,6 +127,9 @@
                     <systemPropertyVariables>
                         <project.root>${project.basedir}</project.root>
                         <config>${config}</config>
+                        <allure.results.directory>
+                            ${project.build.directory}/allure-results
+                        </allure.results.directory>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
