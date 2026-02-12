@@ -21,10 +21,19 @@ pipeline {
                 bat "mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
             }
         }
-//         stage('Deploy') {
-//             steps {
-//              echo 'Test stage placeholder'
-//             }
-//         }
+        stage('Debug') {
+            steps {
+                bat 'dir target'
+                bat 'dir target\\allure-results'
+            }
+        }
+        stage('Deploy') {
+            steps {
+             allure includeProperties:
+             false, jdk: '',
+             resultPolicy: 'LEAVE_AS_IS',
+             results: [[path: 'target/allure-results']]
+            }
+        }
     }
 }
