@@ -14,7 +14,6 @@ import java.util.Objects;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-//@Listeners({AllureListener.class})
 public class LoginTest {
 
     LoginPage1 loginPage;
