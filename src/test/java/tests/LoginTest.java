@@ -14,7 +14,7 @@ import java.util.Objects;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class LoginTest {
+public class LoginTest extends BaseTest{
 
     LoginPage1 loginPage;
     InventoryPage inventoryPage;
@@ -66,6 +66,7 @@ public class LoginTest {
         loginPage = new LoginPage1(getDriver());
         loginPage.login(user, password);
         inventoryPage = new InventoryPage(getDriver());
+        LOGGER.info("Logged into system");
         assertThat("Inventory container is not present in the inventory page", inventoryPage.isInventoryContainerPresent(), is(true));
     }
 
@@ -77,6 +78,7 @@ public class LoginTest {
         getDriver().get(Objects.requireNonNull(ConfigManager.baseUrl(), "base_url is missing"));
         loginPage = new LoginPage1(getDriver());
         loginPage.login(ConfigManager.username(), "wrong_password");
+        LOGGER.info("Tried to log into system with wrong credentials");
         assertThat("Login with incorrect data was successful", loginPage.isDataTestErrorPresentOnPage(), is(true));
     }
 

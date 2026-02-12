@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
-public class LoginAndCartTest {
+public class LoginAndCartTest extends BaseTest{
 
     private static final ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
 
@@ -46,6 +46,7 @@ public class LoginAndCartTest {
         inventory.addProductToCart("Sauce Labs Backpack");
         inventory.clickOnShoppingCartLink();
         CartPage cartPage = new CartPage(getDriver());
+        LOGGER.info("Clicked on shopping cart link");
         assertThat("Shopping cart page is not opened", cartPage.isShoppingCartOpened(), is(true));
         assertThat("Shopping cart is empty", cartPage.isProductPresentInCart("Sauce Labs Backpack"), is(true));
     }
