@@ -26,7 +26,7 @@ pipeline {
              allure includeProperties:
              false, jdk: '',
              resultPolicy: 'LEAVE_AS_IS',
-             results: [[path: 'target/allure-results']]
+             results: [[path: '/allure-results']]
             }
         }
     }
