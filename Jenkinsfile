@@ -14,7 +14,7 @@ pipeline {
                 bat "mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
             }
         }
-        stage('Deploy reports') {
+        stage('Deploy reports')  {
             steps {
              allure includeProperties:
              false, jdk: '',
