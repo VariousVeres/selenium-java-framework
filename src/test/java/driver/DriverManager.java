@@ -2,12 +2,22 @@ package driver;
 
 import org.openqa.selenium.WebDriver;
 
-public abstract class DriverManager {
+public class DriverManager {
+    private static final ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
 
-    public abstract WebDriver createDriver();
+    public static WebDriver getDriver() {
+        return webDriverThreadLocal.get();
+    }
 
-    public WebDriver getDriver() {
-        return createDriver();
+    public static void setDriver(WebDriver driver) {
+        webDriverThreadLocal.set(driver);
+    }
+
+    public static void quitDriver() {
+        if (webDriverThreadLocal.get() != null) {
+            webDriverThreadLocal.get().quit();
+            webDriverThreadLocal.remove();
+        }
     }
 
 }

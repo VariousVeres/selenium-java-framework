@@ -7,10 +7,10 @@ public class BrowserFactory {
     public static WebDriver getBrowserDriver(String browser) {
         switch (browser.toLowerCase()) {
             case "chrome":
-                return new ChromeDriverManager().getDriver();
+                return new ChromeDriverCreator().getDriver();
 
             case "firefox":
-                return new FirefoxDriverManager().getDriver();
+                return new FirefoxDriverCreator().getDriver();
 
             default:
                 throw new IllegalArgumentException("Wrong browser: " + browser);
