@@ -1,6 +1,5 @@
 package tests;
 
-
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -42,12 +41,9 @@ public class LoginTest extends BaseTest{
 //        }
 //    }
 
-
-    // @BeforeMethod is used to support parallel="methods" execution
     @BeforeMethod
     public void setUp() {
         setDriver(new ChromeDriver(ChromeOptionsHelper.getChromeOptions()));
-
     }
 
     @DataProvider(parallel = true)
