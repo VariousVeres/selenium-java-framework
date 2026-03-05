@@ -8,10 +8,8 @@ public class BrowserFactory {
         switch (browser.toLowerCase()) {
             case "chrome":
                 return new ChromeDriverCreator().getDriver();
-
             case "firefox":
                 return new FirefoxDriverCreator().getDriver();
-
             default:
                 throw new IllegalArgumentException("Wrong browser: " + browser);
         }
