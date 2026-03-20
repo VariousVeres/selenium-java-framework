@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools {
+            // Name configured in Jenkins Tools
+            allure 'allure-2.0'
+        }
     parameters {
            choice(name: 'SUITE', choices: ['pair_classes.xml'], description: 'Pick xml file for run')
        }
