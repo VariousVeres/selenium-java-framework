@@ -9,20 +9,29 @@ pipeline {
             echo "Selected suite: ${params.SUITE}"
             }
         }
+        stage('Build') {
+                    steps {
+                      catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                        echo "Clearing project!!!"
+                        bat "mvn clean"
+                        }
+                    }
+                }
         stage('Test') {
             steps {
               catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                bat "mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
+                echo "Starting tests!!!"
+                bat "mvn test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
                 }
             }
         }
-//         stage('Deploy reports') {
-//             steps {
-//              allure includeProperties:
-//              false, jdk: '',
-//              resultPolicy: 'LEAVE_AS_IS',
-//              results: [[path: '/target/allure-results']]
-//             }
-//         }
+        stage('Deploy reports') {
+            steps {
+             allure includeProperties:
+             false, jdk: '',
+             resultPolicy: 'LEAVE_AS_IS',
+             results: [[path: '/target/allure-results']]
+            }
+        }
     }
 }
