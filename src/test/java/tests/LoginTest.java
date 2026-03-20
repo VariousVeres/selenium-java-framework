@@ -20,15 +20,7 @@ public class LoginTest extends BaseTest{
     LoginPage1 loginPage;
     InventoryPage inventoryPage;
 
-    private static final ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
 
-    public static WebDriver getDriver() {
-        return webDriverThreadLocal.get();
-    }
-
-    private static void setDriver(WebDriver driver) {
-        webDriverThreadLocal.set(driver);
-    }
 
 
 //For parametrized run
@@ -83,7 +75,7 @@ public class LoginTest extends BaseTest{
     public void tearDown() {
         if (getDriver() != null) {
             getDriver().quit();
-            webDriverThreadLocal.remove();
+            getThreadLocal().remove();
         }
     }
 

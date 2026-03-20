@@ -18,15 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LoginAndCartTest extends BaseTest{
 
-    private static final ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
 
-    public static WebDriver getDriver() {
-        return webDriverThreadLocal.get();
-    }
-
-    private static void setDriver(WebDriver driver) {
-        webDriverThreadLocal.set(driver);
-    }
 
     @BeforeClass
     public void setUpAndLogin() {
