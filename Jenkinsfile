@@ -2,25 +2,17 @@ pipeline {
     agent any
     parameters {
            choice(name: 'SUITE', choices: ['pair_classes.xml'], description: 'Pick xml file for run')
-        }
+       }
     stages {
         stage('Echoing parameters') {
             steps {
             echo "Selected suite: ${params.SUITE}"
             }
         }
-         stage('Build') {
-                    steps {
-                        bat "mvn clean"
-            }
-        }
-
         stage('Test') {
             steps {
               catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                echo "Tests are starting!"
-                bat "pwd"
-                bat "mvn test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
+                bat "mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
                 }
             }
         }
