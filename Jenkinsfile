@@ -13,7 +13,7 @@ pipeline {
                     steps {
                       catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                         echo "Clearing project!!!"
-                        mvn "clean"
+                        bat 'mvn -version'
                         }
                     }
                 }
@@ -21,7 +21,7 @@ pipeline {
             steps {
               catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                 echo "Starting tests!!!"
-                bat "mvn test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
+                bat "mvn clean test -DsuiteXmlFile=src/test/resources/${params.SUITE}"
                 }
             }
         }
