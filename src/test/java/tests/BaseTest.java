@@ -1,24 +1,31 @@
 package tests;
 
+import driver.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import driver.BrowserFactory;
 
 public abstract class BaseTest {
-    protected final Logger LOGGER = LoggerFactory.getLogger(LoginTest.class);
+    protected final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-    private static final ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
+    @BeforeMethod
+    public void setUp() {
+        String browser = System.getProperty("browser", "chrome");
+        DriverManager.setDriver(BrowserFactory.getBrowserDriver(browser));
+        getDriver().manage().window().maximize();
 
-    public static WebDriver getDriver() {
-        return webDriverThreadLocal.get();
     }
 
-    public static void setDriver(WebDriver driver) {
-        webDriverThreadLocal.set(driver);
+    @AfterMethod
+    public void tearDown() {
+        DriverManager.quitDriver();
     }
 
-    public ThreadLocal<WebDriver> getThreadLocal() {
-        return webDriverThreadLocal;
+    protected WebDriver getDriver() {
+        return DriverManager.getDriver();
     }
 
 }
