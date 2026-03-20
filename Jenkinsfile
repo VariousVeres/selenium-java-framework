@@ -13,7 +13,7 @@ pipeline {
                     steps {
                       catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                         echo "Clearing project!!!"
-                        bat "mvn clean"
+                        mvn "clean"
                         }
                     }
                 }
